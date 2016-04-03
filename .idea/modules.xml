@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/GooglePlay.iml" filepath="$PROJECT_DIR$/GooglePlay.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PagerSlidingTabStrip_library/PagerSlidingTabStrip_library.iml" filepath="$PROJECT_DIR$/PagerSlidingTabStrip_library/PagerSlidingTabStrip_library.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
