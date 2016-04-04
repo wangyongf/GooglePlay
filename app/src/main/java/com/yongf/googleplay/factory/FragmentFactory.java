@@ -5,14 +5,15 @@
  * 描述: 								
  * 修改历史: 
  * 版本号    作者                日期              简要介绍相关操作
- *  1.0         Scott Wang     2016/4/3       Create	
+ *  1.0         Scott Wang     2016/4/3       Create
+ *  1.1         Scott Wang     2016/4/4       给工厂加入了缓存机制
  */
 
 package com.yongf.googleplay.factory;
 
-import android.support.v4.app.Fragment;
 import android.support.v4.util.SparseArrayCompat;
 
+import com.yongf.googleplay.base.BaseFragment;
 import com.yongf.googleplay.fragment.AppFragment;
 import com.yongf.googleplay.fragment.CategoryFragment;
 import com.yongf.googleplay.fragment.GameFragment;
@@ -25,9 +26,9 @@ import com.yongf.googleplay.fragment.SubjectFragment;
  * 获取Fragment的工厂
  *
  * @author Scott Wang
- * @version 1.0, 2016/4/3
+ * @version 1.1, 2016/4/3
  * @see
- * @since SmartBeiJing1.0
+ * @since GooglePlay1.0
  */
 public class FragmentFactory {
 
@@ -39,7 +40,7 @@ public class FragmentFactory {
     public static final int FRAGMENT_CATEGORY = 5;
     public static final int FRAGMENT_HOT = 6;
 
-    private static SparseArrayCompat<Fragment> cacheFragment = new SparseArrayCompat<>();
+    private static SparseArrayCompat<BaseFragment> cacheFragment = new SparseArrayCompat<>();
 
     /**
      * 获取Fragment的工厂
@@ -47,12 +48,12 @@ public class FragmentFactory {
      * @param position
      * @return
      */
-    public static Fragment getFragment(int position) {
+    public static BaseFragment getFragment(int position) {
 
-        Fragment fragment = null;
+        BaseFragment fragment = null;
 
         //如果缓存中存在，则直接从缓存中取出并返回
-        Fragment tmpFragment = cacheFragment.get(position);
+        BaseFragment tmpFragment = cacheFragment.get(position);
         if (tmpFragment != null) {
             fragment = tmpFragment;
 

@@ -10,33 +10,57 @@
 
 package com.yongf.googleplay.fragment;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
+import android.os.SystemClock;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.yongf.googleplay.base.BaseFragment;
+import com.yongf.googleplay.base.LoadingPager;
+import com.yongf.googleplay.conf.Constants;
 import com.yongf.googleplay.utils.UIUtils;
+
+import java.util.Random;
 
 /**
  * @author Scott Wang
  * @version 1.0, 2016/4/3
  * @description
  * @see
- * @since SmartBeiJing1.0
+ * @since GooglePlay1.0
  */
-public class AppFragment extends Fragment {
+public class AppFragment extends BaseFragment {
 
     private static final String TAG = "AppFragment";
 
-    @Nullable
+    /**
+     * 返回成功的视图
+     *
+     * @return
+     */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View initSuccessView() {
         TextView tv = new TextView(UIUtils.getContext());
         tv.setText(this.getClass().getSimpleName());
 
         return tv;
+    }
+
+    /**
+     * 真正加载数据，执行耗时操作
+     *
+     * @return
+     */
+    @Override
+    public LoadingPager.LoadedResult initData() {
+        //执行耗时操作
+        SystemClock.sleep(Constants.SLEEP_DURATION);
+
+        //随机返回3种状态中的一种
+        LoadingPager.LoadedResult[] array = {LoadingPager.LoadedResult.EMPTY,
+                LoadingPager.LoadedResult.ERROR, LoadingPager.LoadedResult.SUCCESS};
+        Random random = new Random();
+        int index = random.nextInt(array.length);
+
+        return array[index];
     }
 }

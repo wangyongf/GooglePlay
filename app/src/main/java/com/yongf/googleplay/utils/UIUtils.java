@@ -5,13 +5,15 @@
  * 描述: 								
  * 修改历史: 
  * 版本号    作者                日期              简要介绍相关操作
- *  1.0         Scott Wang     2016/4/3       Create	
+ *  1.0         Scott Wang     2016/4/3       Create
+ *  1.1         Scott Wang     2016/4/4       增加3个方法：获取主线程ID, 获取主线程Handler, 安全执行Runnable任务
  */
 
 package com.yongf.googleplay.utils;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.Handler;
 
 import com.yongf.googleplay.base.BaseApplication;
 
@@ -19,7 +21,7 @@ import com.yongf.googleplay.base.BaseApplication;
  * 和UI相关的工具类
  *
  * @author Scott Wang
- * @version 1.0, 2016/4/3
+ * @version 1.1, 2016/4/3
  * @see
  * @since GooglePlay1.0
  */
@@ -82,5 +84,41 @@ public class UIUtils {
      */
     public static String getPackageName() {
         return getContext().getPackageName();
+    }
+
+    /**
+     * 获取主线程的ID
+     *
+     * @return 主线程的ID
+     */
+    public static long getMainThreadID() {
+        return BaseApplication.getMainThreadID();
+    }
+
+    /**
+     * 获取主线程的Handler
+     *
+     * @return 主线程的Handler
+     */
+    public static Handler getMainThreadHandler() {
+        return BaseApplication.getHandler();
+    }
+
+    /**
+     * 安全执行任务
+     *
+     * @param task
+     */
+    public static void postTaskSafely(Runnable task) {
+        int curThreadID = android.os.Process.myTid();
+
+        if (curThreadID == getMainThreadID()) {
+            //如果当前线程是主线程
+            task.run();
+        } else {
+            //如果当前线程不是主线程
+            getMainThreadHandler().post(task);
+        }
+
     }
 }

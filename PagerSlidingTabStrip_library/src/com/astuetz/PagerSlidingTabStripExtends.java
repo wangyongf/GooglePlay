@@ -240,6 +240,10 @@ public class PagerSlidingTabStripExtends extends HorizontalScrollView {
 
                 currentPosition = pager.getCurrentItem();
                 scrollToChild(currentPosition, 0);
+
+                if (delegatePageListener != null) {
+                    delegatePageListener.onPageSelected(0);
+                }
             }
         });
 

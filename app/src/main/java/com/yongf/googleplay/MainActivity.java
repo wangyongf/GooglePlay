@@ -6,6 +6,7 @@
  * 修改历史:
  * 版本号    作者                日期              简要介绍相关操作
  *  1.0         Scott Wang     2016/4/3       Create
+ *  1.1         Scott Wang     2016/4/4       在页面选中的时候开始加载数据
  */
 
 package com.yongf.googleplay;
@@ -25,6 +26,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStripExtends;
+import com.yongf.googleplay.base.BaseFragment;
 import com.yongf.googleplay.factory.FragmentFactory;
 import com.yongf.googleplay.utils.LogUtils;
 import com.yongf.googleplay.utils.UIUtils;
@@ -33,7 +35,7 @@ import com.yongf.googleplay.utils.UIUtils;
  * 主界面
  *
  * @author Scott Wang
- * @version 1.0, 2016/4/3
+ * @version 1.1, 2016/4/3
  * @see
  * @since GooglePlay1.0
  */
@@ -50,11 +52,37 @@ public class MainActivity extends ActionBarActivity {
         //初始化View
         initView();
 
-        //初始化ActionBar
-        initActionBar();
-
         //初始化数据
         initData();
+
+        //初始化事件
+        initEvent();
+    }
+
+    /**
+     * 初始化事件
+     */
+    private void initEvent() {
+        mTabs.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                //完成数据加载
+                BaseFragment fragment = FragmentFactory.getFragment(position);
+                if (fragment != null) {
+                    fragment.getLoadingPager().loadData();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     /**
@@ -83,6 +111,9 @@ public class MainActivity extends ActionBarActivity {
 
         mTabs = (PagerSlidingTabStripExtends) findViewById(R.id.main_tabs);
         mViewPager = (ViewPager) findViewById(R.id.main_viewpager);
+
+        //初始化ActionBar
+        initActionBar();
     }
 
     /**
