@@ -9,7 +9,7 @@
  *  1.1         Scott Wang     2016/4/4       在页面选中的时候开始加载数据
  */
 
-package com.yongf.googleplay;
+package com.yongf.googleplay.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStripExtends;
+import com.yongf.googleplay.R;
 import com.yongf.googleplay.base.BaseFragment;
 import com.yongf.googleplay.factory.FragmentFactory;
 import com.yongf.googleplay.utils.LogUtils;

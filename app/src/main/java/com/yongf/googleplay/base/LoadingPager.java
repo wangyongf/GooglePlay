@@ -7,6 +7,7 @@
  * 版本号    作者                日期              简要介绍相关操作
  *  1.0         Scott Wang     2016/4/4       Create
  *  1.1         Scott Wang     2016/4/4       LoadingPager数据加载，刷新视图，相关优化
+ *  1.2         Scott Wang     2016/4/5       用线程池来管理加载数据的线程
  */
 
 package com.yongf.googleplay.base;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.yongf.googleplay.R;
+import com.yongf.googleplay.factory.ThreadPoolFactory;
 import com.yongf.googleplay.utils.LogUtils;
 import com.yongf.googleplay.utils.UIUtils;
 
@@ -23,7 +25,7 @@ import com.yongf.googleplay.utils.UIUtils;
  * 加载页面的基类
  *
  * @author Scott Wang
- * @version 1.1, 2016/4/4
+ * @version 1.2, 2016/4/4
  * @see
  * @since GooglePlay1.0
  */
@@ -141,7 +143,8 @@ public abstract class LoadingPager extends FrameLayout {
             refreshUI();
 
             //异步加载数据
-            new Thread(new LoadDataTask()).start();
+//            new Thread(new LoadDataTask()).start();
+            ThreadPoolFactory.getNormalPool().execute(new LoadDataTask());
         }
     }
 
