@@ -10,16 +10,24 @@
 
 package com.yongf.googleplay.fragment;
 
-import android.os.SystemClock;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.AbsListView;
+import android.widget.ListView;
 
+import com.lidroid.xutils.exception.HttpException;
 import com.yongf.googleplay.base.BaseFragment;
+import com.yongf.googleplay.base.BaseHolder;
 import com.yongf.googleplay.base.LoadingPager;
-import com.yongf.googleplay.conf.Constants;
+import com.yongf.googleplay.base.SuperBaseAdapter;
+import com.yongf.googleplay.bean.AppInfoBean;
+import com.yongf.googleplay.holder.AppItemHolder;
+import com.yongf.googleplay.protocol.GameProtocol;
 import com.yongf.googleplay.utils.UIUtils;
 
-import java.util.Random;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * @author Scott Wang
@@ -30,7 +38,8 @@ import java.util.Random;
  */
 public class GameFragment extends BaseFragment {
 
-    private static final String TAG = "GameFragment";
+    private GameProtocol mProtocol;
+    private List<AppInfoBean> mData;
 
     /**
      * 返回成功的视图
@@ -39,10 +48,15 @@ public class GameFragment extends BaseFragment {
      */
     @Override
     public View initSuccessView() {
-        TextView tv = new TextView(UIUtils.getContext());
-        tv.setText(this.getClass().getSimpleName());
+        ListView listView = new ListView(UIUtils.getContext());
 
-        return tv;
+        listView.setCacheColorHint(Color.TRANSPARENT);
+        listView.setSelector(new ColorDrawable(Color.TRANSPARENT));
+        listView.setFastScrollEnabled(true);
+
+        listView.setAdapter(new GameAdapter(listView, mData));
+
+        return listView;
     }
 
     /**
@@ -52,15 +66,35 @@ public class GameFragment extends BaseFragment {
      */
     @Override
     public LoadingPager.LoadedResult initData() {
-        //执行耗时操作
-        SystemClock.sleep(Constants.SLEEP_DURATION);
+        //创建协议
+        mProtocol = new GameProtocol();
 
-        //随机返回3种状态中的一种
-        LoadingPager.LoadedResult[] array = {LoadingPager.LoadedResult.EMPTY,
-                LoadingPager.LoadedResult.ERROR, LoadingPager.LoadedResult.SUCCESS};
-        Random random = new Random();
-        int index = random.nextInt(array.length);
+        try {
+            mData = mProtocol.loadData(0);
 
-        return array[index];
+            return checkState(mData);
+        } catch (HttpException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return LoadingPager.LoadedResult.ERROR;
+    }
+
+    private class GameAdapter extends SuperBaseAdapter<AppInfoBean> {
+        public GameAdapter(AbsListView absListView, List<AppInfoBean> dataSource) {
+            super(absListView, dataSource);
+        }
+
+        @Override
+        public BaseHolder<AppInfoBean> getSpecialHolder() {
+            return new AppItemHolder();
+        }
+
+        @Override
+        public List<AppInfoBean> onLoadMore() throws Exception {
+            return mProtocol.loadData(mData.size());
+        }
     }
 }

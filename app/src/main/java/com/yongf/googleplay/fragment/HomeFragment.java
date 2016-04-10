@@ -13,15 +13,15 @@
 package com.yongf.googleplay.fragment;
 
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.SystemClock;
 import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.RequestParams;
-import com.lidroid.xutils.http.ResponseStream;
-import com.lidroid.xutils.http.client.HttpRequest;
 import com.yongf.googleplay.base.BaseFragment;
 import com.yongf.googleplay.base.BaseHolder;
 import com.yongf.googleplay.base.LoadingPager;
@@ -29,7 +29,8 @@ import com.yongf.googleplay.base.SuperBaseAdapter;
 import com.yongf.googleplay.bean.AppInfoBean;
 import com.yongf.googleplay.bean.HomeBean;
 import com.yongf.googleplay.conf.Constants;
-import com.yongf.googleplay.holder.HomeHolder;
+import com.yongf.googleplay.holder.AppItemHolder;
+import com.yongf.googleplay.protocol.HomeProtocol;
 import com.yongf.googleplay.utils.UIUtils;
 
 import java.io.IOException;
@@ -47,6 +48,7 @@ public class HomeFragment extends BaseFragment {
 
     private List<AppInfoBean> mData;            //listView的数据源
     private List<String> pictures;          //轮播图
+    private HomeProtocol mProtocol;
 
     /**
      * 返回成功的视图
@@ -62,8 +64,10 @@ public class HomeFragment extends BaseFragment {
         listView.setCacheColorHint(Color.TRANSPARENT);
         listView.setFastScrollEnabled(true);
 
+        listView.setSelector(new ColorDrawable(Color.TRANSPARENT));
+
         //设置adapter
-        listView.setAdapter(new HomeAdapter(mData));
+        listView.setAdapter(new HomeAdapter(listView, mData));
 
         return listView;
     }
@@ -75,19 +79,25 @@ public class HomeFragment extends BaseFragment {
      */
     @Override
     public LoadingPager.LoadedResult initData() {
+//        try {
+//            //发送网络请求
+//            HttpUtils httpUtils = new HttpUtils();
+//            String url = Constants.URLs.BASE_URL + "home";
+//            RequestParams params = new RequestParams();
+//            params.addQueryStringParameter("index", "0");
+//
+//            ResponseStream responseStream = httpUtils.sendSync(HttpRequest.HttpMethod.GET, url, params);
+//            String result = responseStream.readString();
+//
+//            //json解析
+//            Gson gson = new Gson();
+//            HomeBean homeBean = gson.fromJson(result, HomeBean.class);
+
+        /////// ------------------- 协议简单封装之后 ------------------- ///////
+
+        mProtocol = new HomeProtocol();
         try {
-            //发送网络请求
-            HttpUtils httpUtils = new HttpUtils();
-            String url = Constants.URLs.BASE_URL + "home";
-            RequestParams params = new RequestParams();
-            params.addQueryStringParameter("index", "0");
-
-            ResponseStream responseStream = httpUtils.sendSync(HttpRequest.HttpMethod.GET, url, params);
-            String result = responseStream.readString();
-
-            //json解析
-            Gson gson = new Gson();
-            HomeBean homeBean = gson.fromJson(result, HomeBean.class);
+            HomeBean homeBean = mProtocol.loadData(0);
 
             LoadingPager.LoadedResult state = checkState(homeBean);
             if (state != LoadingPager.LoadedResult.SUCCESS) {       //如果不成功，直接返回 homeBean ok
@@ -112,14 +122,56 @@ public class HomeFragment extends BaseFragment {
         return LoadingPager.LoadedResult.ERROR;
     }
 
+    private List<AppInfoBean> loadMore(int index) throws HttpException, IOException {
+//        //联网加载更多数据
+//        //发送网络请求
+//        HttpUtils httpUtils = new HttpUtils();
+//        String url = Constants.URLs.BASE_URL + "home";
+//        RequestParams params = new RequestParams();
+//        params.addQueryStringParameter("index", index + "");
+//
+//        ResponseStream responseStream = httpUtils.sendSync(HttpRequest.HttpMethod.GET, url, params);
+//        String result = responseStream.readString();
+//
+//        //json解析
+//        Gson gson = new Gson();
+//        HomeBean homeBean = gson.fromJson(result, HomeBean.class);
+
+        /////// ------------------- 协议简单封装之后 ------------------- ///////
+
+        HomeBean homeBean = mProtocol.loadData(index);
+
+        if (null == homeBean) {
+            return null;
+        } else if (null == homeBean.list || 0 == homeBean.list.size()) {
+            return null;
+        }
+
+        return homeBean.list;
+    }
+
     private class HomeAdapter extends SuperBaseAdapter<AppInfoBean> {
-        public HomeAdapter(List<AppInfoBean> dataSource) {
-            super(dataSource);
+
+        public HomeAdapter(AbsListView absListView, List<AppInfoBean> dataSource) {
+            super(absListView, dataSource);
         }
 
         @Override
         public BaseHolder<AppInfoBean> getSpecialHolder() {
-            return new HomeHolder();
+            return new AppItemHolder();
+        }
+
+        @Override
+        public List<AppInfoBean> onLoadMore() throws Exception {
+            //休眠一下
+            SystemClock.sleep(Constants.LOADING_MORE_DURATION);
+
+            return loadMore(mData.size());
+        }
+
+        @Override
+        public void onNormalItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Toast.makeText(UIUtils.getContext(), mData.get(position).packageName, Toast.LENGTH_SHORT).show();
         }
     }
 }

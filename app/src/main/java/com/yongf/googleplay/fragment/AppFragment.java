@@ -10,16 +10,24 @@
 
 package com.yongf.googleplay.fragment;
 
-import android.os.SystemClock;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.AbsListView;
+import android.widget.ListView;
 
+import com.lidroid.xutils.exception.HttpException;
 import com.yongf.googleplay.base.BaseFragment;
+import com.yongf.googleplay.base.BaseHolder;
 import com.yongf.googleplay.base.LoadingPager;
-import com.yongf.googleplay.conf.Constants;
+import com.yongf.googleplay.base.SuperBaseAdapter;
+import com.yongf.googleplay.bean.AppInfoBean;
+import com.yongf.googleplay.holder.AppItemHolder;
+import com.yongf.googleplay.protocol.AppProtocol;
 import com.yongf.googleplay.utils.UIUtils;
 
-import java.util.Random;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * @author Scott Wang
@@ -30,7 +38,8 @@ import java.util.Random;
  */
 public class AppFragment extends BaseFragment {
 
-    private static final String TAG = "AppFragment";
+    private List<AppInfoBean> mData;
+    private AppProtocol mProtocol;
 
     /**
      * 返回成功的视图
@@ -39,10 +48,18 @@ public class AppFragment extends BaseFragment {
      */
     @Override
     public View initSuccessView() {
-        TextView tv = new TextView(UIUtils.getContext());
-        tv.setText(this.getClass().getSimpleName());
+        //返回成功的视图
+        ListView listView = new ListView(UIUtils.getContext());
 
-        return tv;
+        //常规设置
+        listView.setCacheColorHint(Color.TRANSPARENT);
+        listView.setSelector(new ColorDrawable(Color.TRANSPARENT));
+        listView.setFastScrollEnabled(true);
+
+        //设置适配器
+        listView.setAdapter(new AppAdapter(listView, mData));
+
+        return listView;
     }
 
     /**
@@ -53,14 +70,37 @@ public class AppFragment extends BaseFragment {
     @Override
     public LoadingPager.LoadedResult initData() {
         //执行耗时操作
-        SystemClock.sleep(Constants.SLEEP_DURATION);
+//        SystemClock.sleep(Constants.SLEEP_DURATION);
 
-        //随机返回3种状态中的一种
-        LoadingPager.LoadedResult[] array = {LoadingPager.LoadedResult.EMPTY,
-                LoadingPager.LoadedResult.ERROR, LoadingPager.LoadedResult.SUCCESS};
-        Random random = new Random();
-        int index = random.nextInt(array.length);
+        mProtocol = new AppProtocol();
 
-        return array[index];
+        try {
+            mData = mProtocol.loadData(0);
+
+            return checkState(mData);
+        } catch (HttpException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return LoadingPager.LoadedResult.ERROR;
+    }
+
+    private class AppAdapter extends SuperBaseAdapter<AppInfoBean> {
+        public AppAdapter(AbsListView absListView, List<AppInfoBean> dataSource) {
+            super(absListView, dataSource);
+        }
+
+        @Override
+        public BaseHolder<AppInfoBean> getSpecialHolder() {
+            return new AppItemHolder();
+        }
+
+        @Override
+        public List<AppInfoBean> onLoadMore() throws Exception {
+            //加载更多
+            return mProtocol.loadData(mData.size());
+        }
     }
 }

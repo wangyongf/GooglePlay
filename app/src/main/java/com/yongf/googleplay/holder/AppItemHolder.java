@@ -33,7 +33,7 @@ import com.yongf.googleplay.utils.UIUtils;
  * @see
  * @since GooglePlay1.0
  */
-public class HomeHolder extends BaseHolder<AppInfoBean> {
+public class AppItemHolder extends BaseHolder<AppInfoBean> {
 
     @ViewInject(R.id.item_appinfo_iv_icon)
     ImageView mIvIcon;

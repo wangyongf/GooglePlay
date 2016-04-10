@@ -64,6 +64,19 @@ public class Constants {
      * 下载线程池线程保持时间
      */
     public static final int DOWNLOAD_POOL_KEEP_ALIVE_TIME = 3000;
+    /**
+     * 分页的条数
+     */
+    public static final int PAGER_SIZE = 20;
+    /**
+     * 加载更多休眠时间，避免过快
+     */
+    public static final int LOADING_MORE_DURATION = 500;
+
+    /**
+     * JSON缓存过期时间-5分钟
+     */
+    public static final int EXPIRE_TIME = 5 * 60 * 1000;
 
     public static final class URLs {
         /**
@@ -79,11 +92,12 @@ public class Constants {
         /**
          * 服务器地址(Genymotion)
          */
-        public static final String BASE_URL = IP2 + "GooglePlayServer/";
+        public static final String BASE_URL = IP1 + "GooglePlayServer/";
 
         /**
          * 图片地址
          */
         public static final String IMAGE_BASE_URL = BASE_URL + "image?name=";
+
     }
 }
