@@ -8,6 +8,7 @@
  *  1.0         Scott Wang     2016/4/3       Create
  *  1.1         Scott Wang     2016/4/4       增加了模拟耗时操作时长的变量
  *  1.2         Scott Wang     2016/4/5       加入线程池相关常量（核心线程数、最大线程数、保持时间）
+ *  1.3         Scott Wang     2016/4/10     加入服务器相关地址
  */
 
 package com.yongf.googleplay.conf;
@@ -18,7 +19,7 @@ import com.yongf.googleplay.utils.LogUtils;
  * 常量
  *
  * @author Scott Wang
- * @version 1.2, 2016/4/3
+ * @version 1.3, 2016/4/3
  * @see
  * @since GooglePlay1.0
  */
@@ -63,4 +64,26 @@ public class Constants {
      * 下载线程池线程保持时间
      */
     public static final int DOWNLOAD_POOL_KEEP_ALIVE_TIME = 3000;
+
+    public static final class URLs {
+        /**
+         * Genymotion IP
+         */
+        public static final String IP1 = "http://10.0.3.2:8080/";
+
+        /**
+         * 小米3 IP
+         */
+        public static final String IP2 = "http://192.168.1.101:8080/";
+
+        /**
+         * 服务器地址(Genymotion)
+         */
+        public static final String BASE_URL = IP2 + "GooglePlayServer/";
+
+        /**
+         * 图片地址
+         */
+        public static final String IMAGE_BASE_URL = BASE_URL + "image?name=";
+    }
 }

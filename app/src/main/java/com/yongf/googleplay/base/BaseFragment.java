@@ -7,6 +7,7 @@
  * 版本号    作者                日期              简要介绍相关操作
  *  1.0         Scott Wang     2016/4/3       Create
  *  1.1         Scott Wang     2016/4/4       加入LoadingPager视图显示，数据加载，优化，封装
+ *  1.2         Scott Wang     2016/4/10     从网络加载数据的判断，检查数据是否为空，返回加载结果
  */
 
 package com.yongf.googleplay.base;
@@ -21,11 +22,14 @@ import android.view.ViewGroup;
 import com.yongf.googleplay.utils.LogUtils;
 import com.yongf.googleplay.utils.UIUtils;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 所有Fragment的基类
  *
  * @author Scott Wang
- * @version 1.1, 2016/4/3
+ * @version 1.2, 2016/4/3
  * @see
  * @since GooglePlay1.0
  */
@@ -115,4 +119,30 @@ public abstract class BaseFragment extends Fragment {
      * @return
      */
     public abstract LoadingPager.LoadedResult initData();
+
+    /**
+     * @param obj 网络数据json化之后的对象
+     * @return
+     */
+    public LoadingPager.LoadedResult checkState(Object obj) {
+        if (obj == null) {
+            return LoadingPager.LoadedResult.EMPTY;
+        }
+
+        //list
+        if (obj instanceof List) {
+            if (((List) obj).size() == 0) {
+                return LoadingPager.LoadedResult.EMPTY;
+            }
+        }
+
+        //map
+        if (obj instanceof Map) {
+            if (((Map) obj).size() == 0) {
+                return LoadingPager.LoadedResult.EMPTY;
+            }
+        }
+
+        return LoadingPager.LoadedResult.SUCCESS;
+    }
 }

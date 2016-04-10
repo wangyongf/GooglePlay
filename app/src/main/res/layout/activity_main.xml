@@ -1,28 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout android:id="@+id/main_drawerlayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:yongf="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <com.astuetz.PagerSlidingTabStripExtends
-        android:id="@+id/main_tabs"
-        android:layout_width="fill_parent"
-        android:layout_height="48dip"
-        yongf:pstsIndicatorColor="@color/tab_indicator_selected"
+    <!-- menu部分-->
+    <!--android:layout_gravity="left"  左侧菜单-->
+    <!--android:layout_gravity="right"  右侧菜单-->
 
-        yongf:pstsIndicatorHeight="10dp"
-        yongf:pstsSelectedTabTextColor="@color/tab_text_selected"
+    <FrameLayout
+        android:layout_width="180dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:background="#ff0000"></FrameLayout>
 
-        yongf:pstsSelectedTabTextSize="18sp"
+    <!-- 内容部分-->
 
-        yongf:pstsTabTextColor="@color/tab_text_normal"
-        yongf:pstsTabTextSize="16sp"></com.astuetz.PagerSlidingTabStripExtends>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/main_viewpager"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"></android.support.v4.view.ViewPager>
-</LinearLayout>
+        <com.astuetz.PagerSlidingTabStripExtends
+            android:id="@+id/main_tabs"
+            android:layout_width="fill_parent"
+            android:layout_height="48dip"
+            yongf:pstsIndicatorColor="@color/tab_indicator_selected"
+
+            yongf:pstsIndicatorHeight="10dp"
+            yongf:pstsSelectedTabTextColor="@color/tab_text_selected"
+
+            yongf:pstsSelectedTabTextSize="18sp"
+
+            yongf:pstsTabTextColor="@color/tab_text_normal"
+            yongf:pstsTabTextSize="16sp"></com.astuetz.PagerSlidingTabStripExtends>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/main_viewpager"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"></android.support.v4.view.ViewPager>
+    </LinearLayout>
+
+</android.support.v4.widget.DrawerLayout>
+

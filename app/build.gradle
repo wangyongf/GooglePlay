@@ -4,6 +4,8 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
 
+    useLibrary 'org.apache.http.legacy'
+
     defaultConfig {
         applicationId "com.yongf.googleplay"
         minSdkVersion 14
@@ -25,4 +27,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     //    compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
     compile project(':PagerSlidingTabStrip_library')
+    compile files('libs/xutils_library.jar')
+    compile 'com.google.code.gson:gson:2.6.2'
 }
