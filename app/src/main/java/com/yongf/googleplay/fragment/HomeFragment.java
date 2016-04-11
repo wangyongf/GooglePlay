@@ -12,8 +12,6 @@
 
 package com.yongf.googleplay.fragment;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.AbsListView;
@@ -29,6 +27,7 @@ import com.yongf.googleplay.base.SuperBaseAdapter;
 import com.yongf.googleplay.bean.AppInfoBean;
 import com.yongf.googleplay.bean.HomeBean;
 import com.yongf.googleplay.conf.Constants;
+import com.yongf.googleplay.factory.ListViewFactory;
 import com.yongf.googleplay.holder.AppItemHolder;
 import com.yongf.googleplay.protocol.HomeProtocol;
 import com.yongf.googleplay.utils.UIUtils;
@@ -58,13 +57,12 @@ public class HomeFragment extends BaseFragment {
     @Override
     public View initSuccessView() {
         //返回成功的视图
-        ListView listView = new ListView(UIUtils.getContext());
+        ListView listView = ListViewFactory.getListView();
 
-        //简单的设置
-        listView.setCacheColorHint(Color.TRANSPARENT);
-        listView.setFastScrollEnabled(true);
-
-        listView.setSelector(new ColorDrawable(Color.TRANSPARENT));
+//        //创建一个PictureHolder  轮播图
+//        PictureHolder pictureHolder = new PictureHolder();
+//        View headerView = pictureHolder.getHolderView();
+//        listView.addHeaderView(headerView);
 
         //设置adapter
         listView.setAdapter(new HomeAdapter(listView, mData));

@@ -10,8 +10,6 @@
 
 package com.yongf.googleplay.fragment;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
@@ -22,9 +20,9 @@ import com.yongf.googleplay.base.BaseHolder;
 import com.yongf.googleplay.base.LoadingPager;
 import com.yongf.googleplay.base.SuperBaseAdapter;
 import com.yongf.googleplay.bean.AppInfoBean;
+import com.yongf.googleplay.factory.ListViewFactory;
 import com.yongf.googleplay.holder.AppItemHolder;
 import com.yongf.googleplay.protocol.AppProtocol;
-import com.yongf.googleplay.utils.UIUtils;
 
 import java.io.IOException;
 import java.util.List;
@@ -49,12 +47,7 @@ public class AppFragment extends BaseFragment {
     @Override
     public View initSuccessView() {
         //返回成功的视图
-        ListView listView = new ListView(UIUtils.getContext());
-
-        //常规设置
-        listView.setCacheColorHint(Color.TRANSPARENT);
-        listView.setSelector(new ColorDrawable(Color.TRANSPARENT));
-        listView.setFastScrollEnabled(true);
+        ListView listView = ListViewFactory.getListView();
 
         //设置适配器
         listView.setAdapter(new AppAdapter(listView, mData));
