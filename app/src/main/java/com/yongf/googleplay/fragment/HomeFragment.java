@@ -29,6 +29,7 @@ import com.yongf.googleplay.bean.HomeBean;
 import com.yongf.googleplay.conf.Constants;
 import com.yongf.googleplay.factory.ListViewFactory;
 import com.yongf.googleplay.holder.AppItemHolder;
+import com.yongf.googleplay.holder.PictureHolder;
 import com.yongf.googleplay.protocol.HomeProtocol;
 import com.yongf.googleplay.utils.UIUtils;
 
@@ -46,7 +47,7 @@ import java.util.List;
 public class HomeFragment extends BaseFragment {
 
     private List<AppInfoBean> mData;            //listView的数据源
-    private List<String> pictures;          //轮播图
+    private List<String> mPictures;          //轮播图
     private HomeProtocol mProtocol;
 
     /**
@@ -59,10 +60,14 @@ public class HomeFragment extends BaseFragment {
         //返回成功的视图
         ListView listView = ListViewFactory.getListView();
 
-//        //创建一个PictureHolder  轮播图
-//        PictureHolder pictureHolder = new PictureHolder();
-//        View headerView = pictureHolder.getHolderView();
-//        listView.addHeaderView(headerView);
+        //创建一个PictureHolder  轮播图
+        PictureHolder pictureHolder = new PictureHolder();
+
+        //触发加载数据
+        pictureHolder.setDataAndRefreshHolderView(mPictures);
+
+        View headerView = pictureHolder.getHolderView();
+        listView.addHeaderView(headerView);
 
         //设置adapter
         listView.setAdapter(new HomeAdapter(listView, mData));
@@ -108,7 +113,7 @@ public class HomeFragment extends BaseFragment {
             }
 
             mData = homeBean.list;
-            pictures = homeBean.picture;
+            mPictures = homeBean.picture;
 
             return LoadingPager.LoadedResult.SUCCESS;
         } catch (HttpException e) {

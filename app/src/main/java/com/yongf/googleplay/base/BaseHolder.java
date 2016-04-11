@@ -26,6 +26,10 @@ public abstract class BaseHolder<HOLDER_BEAN_TYPE> {
     //做holder需要持有孩子对象
     private HOLDER_BEAN_TYPE mData;
 
+    public View getHolderView() {
+        return mHolderView;
+    }
+
     public BaseHolder() {
         //初始化根布局
         mHolderView = initHolderView();

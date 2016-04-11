@@ -10,16 +10,22 @@
 
 package com.yongf.googleplay.fragment;
 
-import android.os.SystemClock;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.AbsListView;
+import android.widget.ListView;
 
+import com.lidroid.xutils.exception.HttpException;
 import com.yongf.googleplay.base.BaseFragment;
+import com.yongf.googleplay.base.BaseHolder;
 import com.yongf.googleplay.base.LoadingPager;
-import com.yongf.googleplay.conf.Constants;
+import com.yongf.googleplay.base.SuperBaseAdapter;
+import com.yongf.googleplay.bean.SubjectInfoBean;
+import com.yongf.googleplay.holder.SubjectHolder;
+import com.yongf.googleplay.protocol.SubjectProtocol;
 import com.yongf.googleplay.utils.UIUtils;
 
-import java.util.Random;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * @author Scott Wang
@@ -30,7 +36,7 @@ import java.util.Random;
  */
 public class SubjectFragment extends BaseFragment {
 
-    private static final String TAG = "SubjectFragment";
+    private List<SubjectInfoBean> mData;
 
     /**
      * 返回成功的视图
@@ -39,10 +45,11 @@ public class SubjectFragment extends BaseFragment {
      */
     @Override
     public View initSuccessView() {
-        TextView tv = new TextView(UIUtils.getContext());
-        tv.setText(this.getClass().getSimpleName());
+        ListView listView = new ListView(UIUtils.getContext());
 
-        return tv;
+        listView.setAdapter(new SubjectAdapter(listView, mData));
+
+        return listView;
     }
 
     /**
@@ -53,14 +60,30 @@ public class SubjectFragment extends BaseFragment {
     @Override
     public LoadingPager.LoadedResult initData() {
         //执行耗时操作
-        SystemClock.sleep(Constants.SLEEP_DURATION);
+        SubjectProtocol protocol = new SubjectProtocol();
 
-        //随机返回3种状态中的一种
-        LoadingPager.LoadedResult[] array = {LoadingPager.LoadedResult.EMPTY,
-                LoadingPager.LoadedResult.ERROR, LoadingPager.LoadedResult.SUCCESS};
-        Random random = new Random();
-        int index = random.nextInt(array.length);
+        try {
+            mData = protocol.loadData(0);
 
-        return array[index];
+            return checkState(mData);
+        } catch (HttpException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return LoadingPager.LoadedResult.ERROR;
+    }
+
+    private class SubjectAdapter extends SuperBaseAdapter<SubjectInfoBean> {
+
+        public SubjectAdapter(AbsListView absListView, List<SubjectInfoBean> dataSource) {
+            super(absListView, dataSource);
+        }
+
+        @Override
+        public BaseHolder<SubjectInfoBean> getSpecialHolder() {
+            return new SubjectHolder();
+        }
     }
 }

@@ -12,6 +12,7 @@
 package com.yongf.googleplay.utils;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.os.Handler;
 
@@ -36,6 +37,14 @@ public class UIUtils {
      */
     public static Context getContext() {
         return BaseApplication.getContext();
+    }
+
+    /**
+     * 得到Assets资源
+     * @return
+     */
+    public static AssetManager getAssets() {
+        return getContext().getAssets();
     }
 
     /**
@@ -120,5 +129,56 @@ public class UIUtils {
             getMainThreadHandler().post(task);
         }
 
+    }
+
+    /**
+     * 延迟执行任务
+     *
+     * @param task
+     * @param delayMillis
+     */
+    public static void postTaskDelay(Runnable task, int delayMillis) {
+        getMainThreadHandler().postDelayed(task, delayMillis);
+    }
+
+    /**
+     * 移除任务
+     *
+     * @param task
+     */
+    public static void removeTask(Runnable task) {
+        getMainThreadHandler().removeCallbacks(task);
+    }
+
+    /**
+     * dip转px
+     *
+     * @param context 上下文
+     * @param dpValue dip值
+     * @return 转换后的px值
+     */
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
+
+    public static int dip2px(float dpValue) {
+        return dip2px(getContext(), dpValue);
+    }
+
+    /**
+     * px转dip
+     *
+     * @param context 上下文
+     * @param pxValue px值
+     * @return 转换后的dip值
+     */
+    public static int px2dip(Context context, float pxValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (pxValue / scale + 0.5f);
+    }
+
+    public static int px2dip(float pxValue) {
+        return px2dip(getContext(), pxValue);
     }
 }

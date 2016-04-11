@@ -78,6 +78,11 @@ public class Constants {
      */
     public static final int EXPIRE_TIME = 5 * 60 * 1000;
 
+    /**
+     * 首页轮播图展示时长
+     */
+    public static final int HOME_CAROUSEL_DURATION = 4000;
+
     public static final class URLs {
         /**
          * Genymotion IP
@@ -87,7 +92,7 @@ public class Constants {
         /**
          * 小米3 IP
          */
-        public static final String IP2 = "http://192.168.1.101:8080/";
+        public static final String IP2 = "http://192.168.1.102:8080/";
 
         /**
          * 服务器地址(Genymotion)
