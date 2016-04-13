@@ -10,27 +10,35 @@
 
 package com.yongf.googleplay.fragment;
 
-import android.os.SystemClock;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.AbsListView;
+import android.widget.ListView;
 
+import com.lidroid.xutils.exception.HttpException;
 import com.yongf.googleplay.base.BaseFragment;
+import com.yongf.googleplay.base.BaseHolder;
 import com.yongf.googleplay.base.LoadingPager;
-import com.yongf.googleplay.conf.Constants;
-import com.yongf.googleplay.utils.UIUtils;
+import com.yongf.googleplay.base.SuperBaseAdapter;
+import com.yongf.googleplay.bean.CategoryInfoBean;
+import com.yongf.googleplay.factory.ListViewFactory;
+import com.yongf.googleplay.holder.CategoryItemHolder;
+import com.yongf.googleplay.holder.CategoryTitleHolder;
+import com.yongf.googleplay.protocol.CategoryProtocol;
 
-import java.util.Random;
+import java.io.IOException;
+import java.util.List;
 
 /**
+ * 分类页面
+ *
  * @author Scott Wang
  * @version 1.0, 2016/4/3
- * @description
  * @see
  * @since GooglePlay1.0
  */
 public class CategoryFragment extends BaseFragment {
 
-    private static final String TAG = "CategoryFragment";
+    private List<CategoryInfoBean> mData;
 
     /**
      * 返回成功的视图
@@ -39,28 +47,65 @@ public class CategoryFragment extends BaseFragment {
      */
     @Override
     public View initSuccessView() {
-        TextView tv = new TextView(UIUtils.getContext());
-        tv.setText(this.getClass().getSimpleName());
+        ListView listView = ListViewFactory.getListView();
+        listView.setAdapter(new CategoryAdapter(listView, mData));
 
-        return tv;
+        return listView;
     }
 
     /**
      * 真正加载数据，执行耗时操作
      *
-     * @return
+     * @return 数据加载结果
      */
     @Override
     public LoadingPager.LoadedResult initData() {
         //执行耗时操作
-        SystemClock.sleep(Constants.SLEEP_DURATION);
+        CategoryProtocol protocol = new CategoryProtocol();
 
-        //随机返回3种状态中的一种
-        LoadingPager.LoadedResult[] array = {LoadingPager.LoadedResult.EMPTY,
-                LoadingPager.LoadedResult.ERROR, LoadingPager.LoadedResult.SUCCESS};
-        Random random = new Random();
-        int index = random.nextInt(array.length);
+        try {
+            mData = protocol.loadData(0);
 
-        return array[index];
+            return checkState(mData);
+        } catch (HttpException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return LoadingPager.LoadedResult.ERROR;
+    }
+
+    private class CategoryAdapter extends SuperBaseAdapter<CategoryInfoBean> {
+        public CategoryAdapter(AbsListView absListView, List<CategoryInfoBean> dataSource) {
+            super(absListView, dataSource);
+        }
+
+        @Override
+        public BaseHolder<CategoryInfoBean> getSpecialHolder(int position) {
+            CategoryInfoBean categoryInfoBean = mData.get(position);
+            //如果是title ==> titleHolder
+            if (categoryInfoBean.isTitle) {
+                return new CategoryTitleHolder();
+            } else {
+                return new CategoryItemHolder();
+            }
+        }
+
+        @Override
+        public int getViewTypeCount() {
+            return super.getViewTypeCount() + 1;
+        }
+
+        @Override
+        public int getNormalViewType(int position) {        //此时有3种ViewType 0 1 2
+            CategoryInfoBean categoryInfoBean = mData.get(position);
+            //如果是title ==> titleHolder
+            if (categoryInfoBean.isTitle) {
+                return super.getNormalViewType(position) + 1;
+            } else {
+                return super.getNormalViewType(position);
+            }
+        }
     }
 }

@@ -27,6 +27,9 @@ import com.yongf.googleplay.R;
  */
 public class RatioLayout extends FrameLayout {
 
+    private static final int RELATIVE_WIDTH = 0;         //控件宽度固定，已知图片的宽高比，求控件的高度
+    private static final int RELATIVE_HEIGHT = 1;        //控件高度固定，已知图片的宽高比，求控件的宽度
+    private int mRelative = RELATIVE_WIDTH;
     //宽高比
     private float mRatio;
 
@@ -45,6 +48,8 @@ public class RatioLayout extends FrameLayout {
 
         mRatio = typedArray.getFloat(R.styleable.RatioLayout_ratio, 0);
 
+        mRelative = typedArray.getInt(R.styleable.RatioLayout_relative, RELATIVE_WIDTH);
+
         typedArray.recycle();
     }
 
@@ -57,7 +62,7 @@ public class RatioLayout extends FrameLayout {
         //高度固定，已知图片的宽高比，动态改变控件的宽度
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
 
-        if (widthMode == MeasureSpec.EXACTLY && mRatio != 0) {
+        if (widthMode == MeasureSpec.EXACTLY && mRatio != 0 && mRelative == RELATIVE_WIDTH) {
             //宽度固定，已知图片的宽高比，动态改变控件的高度
 
             //得到自身的宽度
@@ -81,7 +86,7 @@ public class RatioLayout extends FrameLayout {
 
             //设置自己的测绘结果
             setMeasuredDimension(width, height);
-        } else if (heightMode == MeasureSpec.EXACTLY && mRatio != 0) {
+        } else if (heightMode == MeasureSpec.EXACTLY && mRatio != 0 && mRelative == RELATIVE_HEIGHT) {
             //高度固定，已知图片的宽高比，动态改变控件的宽度
 
             //得到自身的高度

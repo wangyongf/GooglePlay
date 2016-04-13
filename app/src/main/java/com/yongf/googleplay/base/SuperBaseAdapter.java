@@ -78,7 +78,7 @@ public abstract class SuperBaseAdapter<ITEM_BEAN_TYPE> extends BaseAdapter imple
      * @return
      * @call getView方法中如果没有convertView的时候被创建
      */
-    public abstract BaseHolder<ITEM_BEAN_TYPE> getSpecialHolder();
+    public abstract BaseHolder<ITEM_BEAN_TYPE> getSpecialHolder(int position);
 
     /////// ------------------- ListView里面可以显示多种ViewType ------------------- ///////
 
@@ -101,6 +101,18 @@ public abstract class SuperBaseAdapter<ITEM_BEAN_TYPE> extends BaseAdapter imple
             return VIEWTYPE_LOADMORE;
         }
 
+//        return VIEWTYPE_NORMAL;
+        return getNormalViewType(position);
+    }
+
+    /**
+     * 返回一个普通view的一个viewType
+     *
+     * @param position
+     * @return
+     * @call 子类可以复写该方法，添加更多的ViewType
+     */
+    public int getNormalViewType(int position) {
         return VIEWTYPE_NORMAL;
     }
 
@@ -114,7 +126,7 @@ public abstract class SuperBaseAdapter<ITEM_BEAN_TYPE> extends BaseAdapter imple
             if (getItemViewType(position) == VIEWTYPE_LOADMORE) {       //是加载更多类型
                 holder = (BaseHolder<ITEM_BEAN_TYPE>) getLoadMoreHolder();
             } else {
-                holder = getSpecialHolder();
+                holder = getSpecialHolder(position);
             }
         } else {
             holder = (BaseHolder<ITEM_BEAN_TYPE>) convertView.getTag();
@@ -147,7 +159,7 @@ public abstract class SuperBaseAdapter<ITEM_BEAN_TYPE> extends BaseAdapter imple
     }
 
     /**
-     * 滑倒底之后，获取更多数据
+     * 滑到底之后，获取更多数据
      *
      * @call 滑到底的时候
      */

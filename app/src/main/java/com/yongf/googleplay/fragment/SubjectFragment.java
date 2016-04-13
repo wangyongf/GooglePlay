@@ -28,9 +28,10 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * 专题页面
+ *
  * @author Scott Wang
  * @version 1.0, 2016/4/3
- * @description
  * @see
  * @since GooglePlay1.0
  */
@@ -82,7 +83,7 @@ public class SubjectFragment extends BaseFragment {
         }
 
         @Override
-        public BaseHolder<SubjectInfoBean> getSpecialHolder() {
+        public BaseHolder<SubjectInfoBean> getSpecialHolder(int position) {
             return new SubjectHolder();
         }
     }

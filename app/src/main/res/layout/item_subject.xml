@@ -15,7 +15,8 @@
             android:id="@+id/item_subject_rl"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            yongf:ratio="2.42">
+            yongf:ratio="2.42"
+            yongf:relative="width">
 
             <!-- 注意！！！此处ImageView的高度必须用fill_parent，
             因为RatioLayout的宽高已经根据图片大小而确定了-->
@@ -30,12 +31,12 @@
             android:id="@+id/item_subject_tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:textColor="#D60C31"
-            android:textSize="30sp"
-            android:layout_marginTop="10dp"
             android:layout_below="@id/item_subject_rl"
-            android:text="title" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="title"
+            android:textColor="#D60C31"
+            android:textSize="25sp" />
     </RelativeLayout>
 
 </FrameLayout>

@@ -40,8 +40,6 @@ public abstract class BaseFragment extends Fragment {
      * ------------------- 共有的方法 -------------------
      **/
 
-    private static final String TAG = "BaseFragment";
-
     private LoadingPager mLoadingPager;
 
     public LoadingPager getLoadingPager() {
@@ -108,6 +106,9 @@ public abstract class BaseFragment extends Fragment {
 
     }
 
+    /**
+     * 初始化事件
+     */
     public void initEvent() {
 
     }

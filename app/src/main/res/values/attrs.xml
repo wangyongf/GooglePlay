@@ -3,6 +3,10 @@
 
     <declare-styleable name="RatioLayout">
         <attr name="ratio" format="float" />
+        <attr name="relative">
+            <enum name="width" value="0" />
+            <enum name="height" value="1" />
+        </attr>
     </declare-styleable>
 
 </resources>

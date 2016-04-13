@@ -37,7 +37,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * 主界面Fragment
+ * 应用主页面
  *
  * @author Scott Wang
  * @version 1.2, 2016/4/4
@@ -160,7 +160,7 @@ public class HomeFragment extends BaseFragment {
         }
 
         @Override
-        public BaseHolder<AppInfoBean> getSpecialHolder() {
+        public BaseHolder<AppInfoBean> getSpecialHolder(int position) {
             return new AppItemHolder();
         }
 
