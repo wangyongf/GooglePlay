@@ -92,7 +92,7 @@ public class Constants {
         /**
          * 小米3 IP
          */
-        public static final String IP2 = "http://192.168.1.103:8080/";
+        public static final String IP2 = "http://192.168.1.104:8080/";
 
         /**
          * 服务器地址(Genymotion)

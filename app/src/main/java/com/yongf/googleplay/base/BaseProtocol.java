@@ -5,7 +5,8 @@
  * 描述: 								
  * 修改历史: 
  * 版本号    作者                日期              简要介绍相关操作
- *  1.0         Scott Wang     2016/4/10       Create	
+ *  1.0         Scott Wang     2016/4/10       Create
+ *  1.1         Scott Wang     2016/4/15       进一步优化，允许URL自定义传参，解决缓存文件混乱
  */
 
 package com.yongf.googleplay.base;
@@ -29,12 +30,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * 基本协议
  *
  * @author Scott Wang
- * @version 1.0, 2016/4/10
+ * @version 1.1, 2016/4/10
  * @see
  * @since GooglePlay1.0
  */
@@ -95,15 +97,56 @@ public abstract class BaseProtocol<T> {
     @NonNull
     private File getCacheFile(int index) {
         String dir = FileUtils.getDir("json");
-        String name = getInterfaceKey() + "." + index;
+
+        //如果是详情页    interfaceKey + "." + 包名
+
+        Map<String, String> extraParams = getExtraParams();
+        String name = null;
+        if (extraParams == null) {
+            name = getInterfaceKey() + "." + index;
+        } else {
+            //详情页
+            for (Map.Entry<String, String> info : extraParams.entrySet()) {
+                String key = info.getKey();             //"packageName"
+                String value = info.getValue();         //值 - 包名
+
+                name = getInterfaceKey() + "." + value;         //interfaceKey + "." + packageName
+            }
+        }
+
         return new File(dir, name);
+    }
+
+    /**
+     * 返回额外参数
+     *
+     * @return
+     * @call 默认在基类里面返回是空，但是如果子类需要返回额外的参数，复写该方法
+     */
+    public Map<String, String> getExtraParams() {
+
+
+        return null;
     }
 
     private String getNetworkData(int index) throws HttpException, IOException {
         HttpUtils httpUtils = new HttpUtils();
         String url = Constants.URLs.BASE_URL + getInterfaceKey();
         RequestParams params = new RequestParams();
-        params.addQueryStringParameter("index", index + "");
+
+        Map<String, String> extraParams = getExtraParams();
+
+        if (extraParams == null) {
+            params.addQueryStringParameter("index", index + "");
+        } else {
+            //如果有额外的参数
+            for (Map.Entry<String, String> info : extraParams.entrySet()) {
+                String key = info.getKey();         //参数的key
+                String value = info.getValue();         //参数的value
+
+                params.addQueryStringParameter(key, value);
+            }
+        }
 
         ResponseStream responseStream = httpUtils.sendSync(HttpRequest.HttpMethod.GET, url, params);
         String jsonString = responseStream.readString();

@@ -15,23 +15,18 @@ package com.yongf.googleplay.fragment;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.lidroid.xutils.exception.HttpException;
+import com.yongf.googleplay.adapter.AppItemAdapter;
 import com.yongf.googleplay.base.BaseFragment;
-import com.yongf.googleplay.base.BaseHolder;
 import com.yongf.googleplay.base.LoadingPager;
-import com.yongf.googleplay.base.SuperBaseAdapter;
 import com.yongf.googleplay.bean.AppInfoBean;
 import com.yongf.googleplay.bean.HomeBean;
 import com.yongf.googleplay.conf.Constants;
 import com.yongf.googleplay.factory.ListViewFactory;
-import com.yongf.googleplay.holder.AppItemHolder;
 import com.yongf.googleplay.holder.PictureHolder;
 import com.yongf.googleplay.protocol.HomeProtocol;
-import com.yongf.googleplay.utils.UIUtils;
 
 import java.io.IOException;
 import java.util.List;
@@ -153,15 +148,10 @@ public class HomeFragment extends BaseFragment {
         return homeBean.list;
     }
 
-    private class HomeAdapter extends SuperBaseAdapter<AppInfoBean> {
+    private class HomeAdapter extends AppItemAdapter {
 
         public HomeAdapter(AbsListView absListView, List<AppInfoBean> dataSource) {
             super(absListView, dataSource);
-        }
-
-        @Override
-        public BaseHolder<AppInfoBean> getSpecialHolder(int position) {
-            return new AppItemHolder();
         }
 
         @Override
@@ -170,11 +160,6 @@ public class HomeFragment extends BaseFragment {
             SystemClock.sleep(Constants.LOADING_MORE_DURATION);
 
             return loadMore(mData.size());
-        }
-
-        @Override
-        public void onNormalItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Toast.makeText(UIUtils.getContext(), mData.get(position).packageName, Toast.LENGTH_SHORT).show();
         }
     }
 }

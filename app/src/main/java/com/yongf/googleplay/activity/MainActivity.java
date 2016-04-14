@@ -16,18 +16,13 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStripExtends;
 import com.yongf.googleplay.R;
@@ -97,10 +92,6 @@ public class MainActivity extends ActionBarActivity {
      */
     private void initData() {
         mMainTitles = UIUtils.getStringArray(R.array.main_titles);
-
-//        MainPagerAdapter adapter = new MainPagerAdapter();
-
-//        MainFragmentPagerAdapter adapter = new MainFragmentPagerAdapter(getSupportFragmentManager());
 
         MainFragmentStatePagerAdapter adapter = new MainFragmentStatePagerAdapter(getSupportFragmentManager());
 
@@ -174,81 +165,6 @@ public class MainActivity extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.main, menu);
 
         return true;
-    }
-
-    class MainPagerAdapter extends PagerAdapter {
-
-        @Override
-        public int getCount() {
-            if (mMainTitles != null) {
-                return mMainTitles.length;
-            }
-
-            return 0;
-        }
-
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == object;
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            TextView tv = new TextView(UIUtils.getContext());
-            tv.setText(mMainTitles[position]);
-
-            container.addView(tv);
-
-            return tv;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((View) object);
-        }
-
-        /**
-         * 必须要重写此方法
-         *
-         * @param position
-         * @return
-         */
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mMainTitles[position];
-        }
-    }
-
-    class MainFragmentPagerAdapter extends FragmentPagerAdapter {
-
-        public MainFragmentPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            //创建Fragment
-            Fragment fragment = FragmentFactory.getFragment(position);
-
-            LogUtils.sf("初始化" + mMainTitles[position]);
-//            Log.i("GooglePlay", "初始化" + mMainTitles[position]);
-
-            return fragment;
-        }
-
-        @Override
-        public int getCount() {
-            if (mMainTitles != null) {
-                return mMainTitles.length;
-            }
-
-            return 0;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mMainTitles[position];
-        }
     }
 
     class MainFragmentStatePagerAdapter extends FragmentStatePagerAdapter {

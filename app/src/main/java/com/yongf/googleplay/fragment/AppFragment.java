@@ -15,13 +15,11 @@ import android.widget.AbsListView;
 import android.widget.ListView;
 
 import com.lidroid.xutils.exception.HttpException;
+import com.yongf.googleplay.adapter.AppItemAdapter;
 import com.yongf.googleplay.base.BaseFragment;
-import com.yongf.googleplay.base.BaseHolder;
 import com.yongf.googleplay.base.LoadingPager;
-import com.yongf.googleplay.base.SuperBaseAdapter;
 import com.yongf.googleplay.bean.AppInfoBean;
 import com.yongf.googleplay.factory.ListViewFactory;
-import com.yongf.googleplay.holder.AppItemHolder;
 import com.yongf.googleplay.protocol.AppProtocol;
 
 import java.io.IOException;
@@ -81,14 +79,9 @@ public class AppFragment extends BaseFragment {
         return LoadingPager.LoadedResult.ERROR;
     }
 
-    private class AppAdapter extends SuperBaseAdapter<AppInfoBean> {
+    private class AppAdapter extends AppItemAdapter {
         public AppAdapter(AbsListView absListView, List<AppInfoBean> dataSource) {
             super(absListView, dataSource);
-        }
-
-        @Override
-        public BaseHolder<AppInfoBean> getSpecialHolder(int position) {
-            return new AppItemHolder();
         }
 
         @Override

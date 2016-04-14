@@ -7,6 +7,7 @@
  * 版本号    作者                日期              简要介绍相关操作
  *  1.0         Scott Wang     2016/4/5       Create
  *  1.1         Scott Wang     2016/4/10     抽象特殊ViewHolder，加入加载更多列表项
+ *  1.2         Scott Wang     2016/4/15     修复：由于首页轮播图导致的点击事件错位
  */
 
 package com.yongf.googleplay.base;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 
 import com.yongf.googleplay.conf.Constants;
 import com.yongf.googleplay.factory.ThreadPoolFactory;
@@ -29,7 +31,7 @@ import java.util.List;
  * 基类Adapter
  *
  * @author Scott Wang
- * @version 1.1, 2016/4/5
+ * @version 1.2, 2016/4/5
  * @see
  * @since GooglePlay1.0
  */
@@ -38,6 +40,7 @@ public abstract class SuperBaseAdapter<ITEM_BEAN_TYPE> extends BaseAdapter imple
     public static final int VIEWTYPE_LOADMORE = 0;
     public static final int VIEWTYPE_NORMAL = 1;
 
+    private final AbsListView mAbsListView;
     public List<ITEM_BEAN_TYPE> mDataSource = new ArrayList<>();
     private LoadMoreHolder mLoadMoreHolder;
     private LoadMoreTask mLoadMoreTask;
@@ -47,6 +50,7 @@ public abstract class SuperBaseAdapter<ITEM_BEAN_TYPE> extends BaseAdapter imple
 
         absListView.setOnItemClickListener(this);
         mDataSource = dataSource;
+        mAbsListView = absListView;
     }
 
     @Override
@@ -208,6 +212,11 @@ public abstract class SuperBaseAdapter<ITEM_BEAN_TYPE> extends BaseAdapter imple
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        if (mAbsListView instanceof ListView) {
+            position = position - ((ListView) mAbsListView).getHeaderViewsCount();
+        }
+
         if (VIEWTYPE_LOADMORE == getItemViewType(position)) {
             //重新加载更多
             startLoadingMore();

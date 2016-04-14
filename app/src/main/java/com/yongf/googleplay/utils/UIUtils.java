@@ -7,6 +7,7 @@
  * 版本号    作者                日期              简要介绍相关操作
  *  1.0         Scott Wang     2016/4/3       Create
  *  1.1         Scott Wang     2016/4/4       增加3个方法：获取主线程ID, 获取主线程Handler, 安全执行Runnable任务
+ *  1.2         Scott Wang     2016/4/15     得到strings.xml中带占位符的string
  */
 
 package com.yongf.googleplay.utils;
@@ -22,7 +23,7 @@ import com.yongf.googleplay.base.BaseApplication;
  * 和UI相关的工具类
  *
  * @author Scott Wang
- * @version 1.1, 2016/4/3
+ * @version 1.2, 2016/4/3
  * @see
  * @since GooglePlay1.0
  */
@@ -41,6 +42,7 @@ public class UIUtils {
 
     /**
      * 得到Assets资源
+     *
      * @return
      */
     public static AssetManager getAssets() {
@@ -64,6 +66,17 @@ public class UIUtils {
      */
     public static String getString(int resID) {
         return getContext().getResources().getString(resID);
+    }
+
+    /**
+     * 得到String.xml中的字符串，带占位符
+     *
+     * @param resID
+     * @param formatArgs 占位符
+     * @return
+     */
+    public static String getString(int resID, Object... formatArgs) {
+        return getContext().getResources().getString(resID, formatArgs);
     }
 
     /**
