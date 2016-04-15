@@ -5,16 +5,16 @@
  * 描述:
  * 修改历史:
  * 版本号    作者                日期              简要介绍相关操作
- *  1.0         Scott Wang     2016/4/14       Create
- *  1.1         Scott Wang     2016/4/15       应用详情页跳转，数据加载，数据获取协议封装，信息部分
- *  1.2         Scott Wang     2016/4/15       详情页安全部分数据展示、折叠属性动画
+ *  1.0         Scott Wang     2016/4/14       新增：Create
+ *  1.1         Scott Wang     2016/4/15       新增：应用详情页跳转，数据加载，数据获取协议封装，信息部分
+ *  1.2         Scott Wang     2016/4/15       新增：详情页安全部分数据展示、折叠属性动画
+ *  1.3         Scott Wang     2016/4/16       优化：部分封装，详情页的返回应用列表，标题栏显示应用名称
  */
 
 package com.yongf.googleplay.activity;
 
-import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -22,6 +22,7 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.yongf.googleplay.R;
+import com.yongf.googleplay.base.BaseActivity;
 import com.yongf.googleplay.base.LoadingPager;
 import com.yongf.googleplay.bean.AppInfoBean;
 import com.yongf.googleplay.holder.AppDetailBottomHolder;
@@ -38,11 +39,11 @@ import java.io.IOException;
  * 应用详情页
  *
  * @author Scott Wang
- * @version 1.2, 2016/4/14
+ * @version 1.3, 2016/4/14
  * @see
  * @since GooglePlay1.0
  */
-public class DetailActivity extends ActionBarActivity {
+public class DetailActivity extends BaseActivity {
 
     @ViewInject(R.id.app_detail_bottom)
     FrameLayout mContainerBottom;
@@ -62,20 +63,15 @@ public class DetailActivity extends ActionBarActivity {
     private String mPackageName;
     private LoadingPager mLoadingPager;
     private AppInfoBean mData;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        //初始化
-        init();
-    }
+    private String mName;
 
     /**
      * 页面初始化
      */
-    private void init() {
+    @Override
+    public void init() {
         mPackageName = getIntent().getStringExtra("packageName");
+        mName = getIntent().getStringExtra("name");
 
         mLoadingPager = new LoadingPager(UIUtils.getContext()) {
             @Override
@@ -97,15 +93,31 @@ public class DetailActivity extends ActionBarActivity {
         initActionBar();
     }
 
-    private void initActionBar() {
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initActionBar() {
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setLogo(R.mipmap.ic_launcher);        //设置Logo
-        actionBar.setIcon(R.mipmap.ic_launcher);            //设置Icon
         actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setTitle("Google Play");
+        actionBar.setTitle(mName);
 
         //显示返回按钮
         actionBar.setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -166,12 +178,5 @@ public class DetailActivity extends ActionBarActivity {
         appDetailBottomHolder.setDataAndRefreshHolderView(mData);
 
         return view;
-    }
-
-    /**
-     * 初始化事件
-     */
-    private void initEvent() {
-
     }
 }

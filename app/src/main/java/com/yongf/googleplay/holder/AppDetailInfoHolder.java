@@ -5,7 +5,7 @@
  * 描述: 								
  * 修改历史: 
  * 版本号    作者                日期              简要介绍相关操作
- *  1.0         Scott Wang     2016/4/14       Create	
+ *  1.0         Scott Wang     2016/4/14       新增：Create
  */
 
 package com.yongf.googleplay.holder;

@@ -5,7 +5,8 @@
  * 描述: 								
  * 修改历史: 
  * 版本号    作者                日期              简要介绍相关操作
- *  1.0         Scott Wang     2016/4/14       Create	
+ *  1.0         Scott Wang     2016/4/14       新增：Create
+ *  1.1         Scott Wang     2016/4/16       修复：设置含广告的应用的安全描述部分文字颜色
  */
 
 package com.yongf.googleplay.holder;
@@ -33,7 +34,7 @@ import java.util.List;
  * 应用安全描述部分Holder
  *
  * @author Scott Wang
- * @version 1.0, 2016/4/14
+ * @version 1.1, 2016/4/14
  * @see
  * @since GooglePlay1.0
  */
@@ -77,6 +78,15 @@ public class AppDetailSecureHolder extends BaseHolder<AppInfoBean> implements Vi
             //描述内容
             TextView tvDes = new TextView(UIUtils.getContext());
             tvDes.setText(appInfoSafeBean.safeDes);
+
+            //设置文字颜色
+            if (0 == appInfoSafeBean.safeDesColor) {
+                tvDes.setTextColor(UIUtils.getColor(R.color.app_detail_safe_normal));
+            } else {
+                tvDes.setTextColor(UIUtils.getColor(R.color.app_detail_safe_warning));
+            }
+
+            tvDes.setGravity(View.TEXT_ALIGNMENT_CENTER);
 
             //加点间距
             int padding = UIUtils.dip2px(5);

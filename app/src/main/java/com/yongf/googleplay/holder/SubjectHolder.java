@@ -25,7 +25,7 @@ import com.yongf.googleplay.utils.BitmapHelper;
 import com.yongf.googleplay.utils.UIUtils;
 
 /**
- * ${description}
+ * 专题页面Holder
  *
  * @author Scott Wang
  * @version 1.0, 2016/4/11

@@ -5,7 +5,7 @@
  * 描述: 								
  * 修改历史: 
  * 版本号    作者                日期              简要介绍相关操作
- *  1.0         Scott Wang     2016/4/14       Create	
+ *  1.0         Scott Wang     2016/4/14       新增：Create
  */
 
 package com.yongf.googleplay.adapter;
@@ -45,17 +45,21 @@ public class AppItemAdapter extends SuperBaseAdapter<AppInfoBean> {
 
     @Override
     public void onNormalItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Jump2DetailActivity(mDataSource.get(position).packageName);
+        Jump2DetailActivity(mDataSource.get(position).packageName, mDataSource.get(position).name);
     }
 
     /**
      * 跳转到详情页
+     *
+     * @param packageName 应用包名
+     * @param name        应用名称
      */
-    private void Jump2DetailActivity(String packageName) {
+    private void Jump2DetailActivity(String packageName, String name) {
         Intent intent = new Intent(UIUtils.getContext(), DetailActivity.class);
 
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("packageName", packageName);
+        intent.putExtra("name", name);
 
         UIUtils.getContext().startActivity(intent);
     }

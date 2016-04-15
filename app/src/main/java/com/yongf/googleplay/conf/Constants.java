@@ -5,10 +5,11 @@
  * 描述: 								
  * 修改历史: 
  * 版本号    作者                日期              简要介绍相关操作
- *  1.0         Scott Wang     2016/4/3       Create
- *  1.1         Scott Wang     2016/4/4       增加了模拟耗时操作时长的变量
- *  1.2         Scott Wang     2016/4/5       加入线程池相关常量（核心线程数、最大线程数、保持时间）
- *  1.3         Scott Wang     2016/4/10     加入服务器相关地址
+ *  1.0         Scott Wang     2016/4/3       新增：Create
+ *  1.1         Scott Wang     2016/4/4       新增：增加了模拟耗时操作时长的变量
+ *  1.2         Scott Wang     2016/4/5       新增：加入线程池相关常量（核心线程数、最大线程数、保持时间）
+ *  1.3         Scott Wang     2016/4/10     新增：加入服务器相关地址
+ *  1.4         Scott Wang     2016/4/16     新增：加入下载地址
  */
 
 package com.yongf.googleplay.conf;
@@ -19,7 +20,7 @@ import com.yongf.googleplay.utils.LogUtils;
  * 常量
  *
  * @author Scott Wang
- * @version 1.3, 2016/4/3
+ * @version 1.4, 2016/4/3
  * @see
  * @since GooglePlay1.0
  */
@@ -92,7 +93,7 @@ public class Constants {
         /**
          * 小米3 IP
          */
-        public static final String IP2 = "http://192.168.1.104:8080/";
+        public static final String IP2 = "http://192.168.1.102:8080/";
 
         /**
          * 服务器地址(Genymotion)
@@ -103,6 +104,11 @@ public class Constants {
          * 图片地址
          */
         public static final String IMAGE_BASE_URL = BASE_URL + "image?name=";
+
+        /**
+         * 下载应用地址
+         */
+        public static final String DOWNLOAD_BASE_URL = BASE_URL + "download";
 
     }
 }

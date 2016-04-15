@@ -5,7 +5,7 @@
  * 描述: 								
  * 修改历史: 
  * 版本号    作者                日期              简要介绍相关操作
- *  1.0         Scott Wang     2016/4/5       Create	
+ *  1.0         Scott Wang     2016/4/5       新增：Create
  */
 
 package com.yongf.googleplay.holder;
@@ -26,7 +26,7 @@ import com.yongf.googleplay.utils.StringUtils;
 import com.yongf.googleplay.utils.UIUtils;
 
 /**
- * 主页Holder
+ * 应用列表展示Holder
  *
  * @author Scott Wang
  * @version 1.0, 2016/4/5

@@ -5,14 +5,14 @@
  * 描述:
  * 修改历史:
  * 版本号    作者                日期              简要介绍相关操作
- *  1.0         Scott Wang     2016/4/3       Create
- *  1.1         Scott Wang     2016/4/4       在页面选中的时候开始加载数据
- *  1.2         Scott Wang     2016/4/10     侧边栏DrawerLayout
+ *  1.0         Scott Wang     2016/4/3       新增：Create
+ *  1.1         Scott Wang     2016/4/4       新增：在页面选中的时候开始加载数据
+ *  1.2         Scott Wang     2016/4/10     新增：侧边栏DrawerLayout
+ *  1.3         Scott Wang     2016/4/16     优化：封装BaseActivity
  */
 
 package com.yongf.googleplay.activity;
 
-import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -20,12 +20,12 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.astuetz.PagerSlidingTabStripExtends;
 import com.yongf.googleplay.R;
+import com.yongf.googleplay.base.BaseActivity;
 import com.yongf.googleplay.base.BaseFragment;
 import com.yongf.googleplay.factory.FragmentFactory;
 import com.yongf.googleplay.utils.LogUtils;
@@ -35,11 +35,11 @@ import com.yongf.googleplay.utils.UIUtils;
  * 主界面
  *
  * @author Scott Wang
- * @version 1.2, 2016/4/3
+ * @version 1.3, 2016/4/3
  * @see
  * @since GooglePlay1.0
  */
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends BaseActivity {
 
     private PagerSlidingTabStripExtends mTabs;
     private ViewPager mViewPager;
@@ -47,24 +47,38 @@ public class MainActivity extends ActionBarActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
 
+    /**
+     * 初始化数据
+     */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void initData() {
+        mMainTitles = UIUtils.getStringArray(R.array.main_titles);
 
-        //初始化View
-        initView();
+        MainFragmentStatePagerAdapter adapter = new MainFragmentStatePagerAdapter(getSupportFragmentManager());
 
-        //初始化数据
-        initData();
+        mViewPager.setAdapter(adapter);
 
-        //初始化事件
-        initEvent();
+        //ViewPager和tabs的绑定
+        mTabs.setViewPager(mViewPager);
+    }
+
+    /**
+     * 初始化View
+     */
+    @Override
+    public void initView() {
+        setContentView(R.layout.activity_main);
+
+        mTabs = (PagerSlidingTabStripExtends) findViewById(R.id.main_tabs);
+        mViewPager = (ViewPager) findViewById(R.id.main_viewpager);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.main_drawerlayout);
     }
 
     /**
      * 初始化事件
      */
-    private void initEvent() {
+    @Override
+    public void initEvent() {
         mTabs.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -88,37 +102,10 @@ public class MainActivity extends ActionBarActivity {
     }
 
     /**
-     * 初始化数据
-     */
-    private void initData() {
-        mMainTitles = UIUtils.getStringArray(R.array.main_titles);
-
-        MainFragmentStatePagerAdapter adapter = new MainFragmentStatePagerAdapter(getSupportFragmentManager());
-
-        mViewPager.setAdapter(adapter);
-
-        //ViewPager和tabs的绑定
-        mTabs.setViewPager(mViewPager);
-    }
-
-    /**
-     * 初始化View
-     */
-    private void initView() {
-        setContentView(R.layout.activity_main);
-
-        mTabs = (PagerSlidingTabStripExtends) findViewById(R.id.main_tabs);
-        mViewPager = (ViewPager) findViewById(R.id.main_viewpager);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.main_drawerlayout);
-
-        //初始化ActionBar
-        initActionBar();
-    }
-
-    /**
      * 初始化ActionBar
      */
-    private void initActionBar() {
+    @Override
+    public void initActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setLogo(R.mipmap.ic_launcher);        //设置Logo
         actionBar.setIcon(R.mipmap.ic_launcher);            //设置Icon
