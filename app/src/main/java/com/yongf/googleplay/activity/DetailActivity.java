@@ -30,6 +30,7 @@ import com.yongf.googleplay.holder.AppDetailDesHolder;
 import com.yongf.googleplay.holder.AppDetailInfoHolder;
 import com.yongf.googleplay.holder.AppDetailPicHolder;
 import com.yongf.googleplay.holder.AppDetailSecureHolder;
+import com.yongf.googleplay.manager.DownloadManager;
 import com.yongf.googleplay.protocol.DetailProtocol;
 import com.yongf.googleplay.utils.UIUtils;
 
@@ -64,6 +65,7 @@ public class DetailActivity extends BaseActivity {
     private LoadingPager mLoadingPager;
     private AppInfoBean mData;
     private String mName;
+    private AppDetailBottomHolder mAppDetailBottomHolder;
 
     /**
      * 页面初始化
@@ -173,10 +175,37 @@ public class DetailActivity extends BaseActivity {
         appDetailDesHolder.setDataAndRefreshHolderView(mData);
 
         //5. 下载部分
-        AppDetailBottomHolder appDetailBottomHolder = new AppDetailBottomHolder();
-        mContainerBottom.addView(appDetailBottomHolder.getHolderView());
-        appDetailBottomHolder.setDataAndRefreshHolderView(mData);
+        mAppDetailBottomHolder = new AppDetailBottomHolder();
+        mContainerBottom.addView(mAppDetailBottomHolder.getHolderView());
+        mAppDetailBottomHolder.setDataAndRefreshHolderView(mData);
+
+        DownloadManager.getInstance().addObserver(mAppDetailBottomHolder);
 
         return view;
+    }
+
+    /**
+     * 界面不可见的时候移除观察者
+     */
+    @Override
+    protected void onPause() {
+        if (mAppDetailBottomHolder != null) {
+            DownloadManager.getInstance().deleteObserver(mAppDetailBottomHolder);
+        }
+
+        super.onPause();
+    }
+
+    /**
+     * 界面可见的时候重新添加观察者
+     */
+    @Override
+    protected void onResume() {
+        if (mAppDetailBottomHolder != null) {
+            //开启监听的时候，手动获取最新状态
+            mAppDetailBottomHolder.addObserverAndRefresh();
+        }
+
+        super.onResume();
     }
 }

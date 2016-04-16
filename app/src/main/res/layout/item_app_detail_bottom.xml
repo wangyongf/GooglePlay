@@ -37,9 +37,10 @@
 
         <!-- 下载区域 -->
 
-        <Button
+        <com.yongf.googleplay.views.ProgressButton
             android:id="@+id/app_detail_download_btn_download"
             android:layout_width="match_parent"
+            android:gravity="center"
             android:layout_height="38dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
