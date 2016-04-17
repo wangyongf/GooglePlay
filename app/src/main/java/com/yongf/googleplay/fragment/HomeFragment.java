@@ -25,7 +25,9 @@ import com.yongf.googleplay.bean.AppInfoBean;
 import com.yongf.googleplay.bean.HomeBean;
 import com.yongf.googleplay.conf.Constants;
 import com.yongf.googleplay.factory.ListViewFactory;
+import com.yongf.googleplay.holder.AppItemHolder;
 import com.yongf.googleplay.holder.PictureHolder;
+import com.yongf.googleplay.manager.DownloadManager;
 import com.yongf.googleplay.protocol.HomeProtocol;
 
 import java.io.IOException;
@@ -44,6 +46,7 @@ public class HomeFragment extends BaseFragment {
     private List<AppInfoBean> mData;            //listView的数据源
     private List<String> mPictures;          //轮播图
     private HomeProtocol mProtocol;
+    private HomeAdapter mAdapter;
 
     /**
      * 返回成功的视图
@@ -65,7 +68,8 @@ public class HomeFragment extends BaseFragment {
         listView.addHeaderView(headerView);
 
         //设置adapter
-        listView.setAdapter(new HomeAdapter(listView, mData));
+        mAdapter = new HomeAdapter(listView, mData);
+        listView.setAdapter(mAdapter);
 
         return listView;
     }
@@ -77,19 +81,6 @@ public class HomeFragment extends BaseFragment {
      */
     @Override
     public LoadingPager.LoadedResult initData() {
-//        try {
-//            //发送网络请求
-//            HttpUtils httpUtils = new HttpUtils();
-//            String url = Constants.URLs.BASE_URL + "home";
-//            RequestParams params = new RequestParams();
-//            params.addQueryStringParameter("index", "0");
-//
-//            ResponseStream responseStream = httpUtils.sendSync(HttpRequest.HttpMethod.GET, url, params);
-//            String result = responseStream.readString();
-//
-//            //json解析
-//            Gson gson = new Gson();
-//            HomeBean homeBean = gson.fromJson(result, HomeBean.class);
 
         /////// ------------------- 协议简单封装之后 ------------------- ///////
 
@@ -121,19 +112,6 @@ public class HomeFragment extends BaseFragment {
     }
 
     private List<AppInfoBean> loadMore(int index) throws HttpException, IOException {
-//        //联网加载更多数据
-//        //发送网络请求
-//        HttpUtils httpUtils = new HttpUtils();
-//        String url = Constants.URLs.BASE_URL + "home";
-//        RequestParams params = new RequestParams();
-//        params.addQueryStringParameter("index", index + "");
-//
-//        ResponseStream responseStream = httpUtils.sendSync(HttpRequest.HttpMethod.GET, url, params);
-//        String result = responseStream.readString();
-//
-//        //json解析
-//        Gson gson = new Gson();
-//        HomeBean homeBean = gson.fromJson(result, HomeBean.class);
 
         /////// ------------------- 协议简单封装之后 ------------------- ///////
 
@@ -146,6 +124,34 @@ public class HomeFragment extends BaseFragment {
         }
 
         return homeBean.list;
+    }
+
+    @Override
+    public void onResume() {
+        //重新添加监听
+        if (mAdapter != null) {
+            List<AppItemHolder> appItemHolders = mAdapter.getAppItemHolders();
+            for (AppItemHolder holder : appItemHolders) {
+                DownloadManager.getInstance().addObserver(holder);
+            }
+            //手动刷新
+            mAdapter.notifyDataSetChanged();
+        }
+
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        //移除监听
+        if (mAdapter != null) {
+            List<AppItemHolder> appItemHolders = mAdapter.getAppItemHolders();
+            for (AppItemHolder holder : appItemHolders) {
+                DownloadManager.getInstance().deleteObserver(holder);
+            }
+        }
+
+        super.onPause();
     }
 
     private class HomeAdapter extends AppItemAdapter {

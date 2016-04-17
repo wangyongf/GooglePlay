@@ -172,14 +172,14 @@ public class AppDetailBottomHolder extends BaseHolder<AppInfoBean> implements Vi
                 }
 
                 break;
-            case R.id.app_detail_download_btn_share:
-
-
-                break;
-            case R.id.app_detail_download_btn_favo:
-
-
-                break;
+//            case R.id.app_detail_download_btn_share:
+//
+//
+//                break;
+//            case R.id.app_detail_download_btn_favo:
+//
+//
+//                break;
         }
     }
 

@@ -20,8 +20,10 @@ import com.yongf.googleplay.base.BaseHolder;
 import com.yongf.googleplay.base.SuperBaseAdapter;
 import com.yongf.googleplay.bean.AppInfoBean;
 import com.yongf.googleplay.holder.AppItemHolder;
+import com.yongf.googleplay.manager.DownloadManager;
 import com.yongf.googleplay.utils.UIUtils;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -34,13 +36,25 @@ import java.util.List;
  */
 public class AppItemAdapter extends SuperBaseAdapter<AppInfoBean> {
 
+    private List<AppItemHolder> mAppItemHolders = new LinkedList<>();
+
     public AppItemAdapter(AbsListView absListView, List<AppInfoBean> dataSource) {
         super(absListView, dataSource);
     }
 
+    public List<AppItemHolder> getAppItemHolders() {
+        return mAppItemHolders;
+    }
+
     @Override
     public BaseHolder<AppInfoBean> getSpecialHolder(int position) {
-        return new AppItemHolder();
+        AppItemHolder appItemHolder = new AppItemHolder();
+        //初始化的时候把AppItemHolder加入到观察者集合中
+        DownloadManager.getInstance().addObserver(appItemHolder);
+
+        mAppItemHolders.add(appItemHolder);     //保存Adapter里面的Holder
+
+        return appItemHolder;
     }
 
     @Override

@@ -158,7 +158,7 @@ public abstract class SuperBaseAdapter<ITEM_BEAN_TYPE> extends BaseAdapter imple
      * @return
      * @call getView中滑到底的时候调用
      */
-    private boolean hasMore() {
+    public boolean hasMore() {
         return true;
     }
 

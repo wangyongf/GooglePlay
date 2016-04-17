@@ -20,6 +20,8 @@ import com.yongf.googleplay.base.BaseFragment;
 import com.yongf.googleplay.base.LoadingPager;
 import com.yongf.googleplay.bean.AppInfoBean;
 import com.yongf.googleplay.factory.ListViewFactory;
+import com.yongf.googleplay.holder.AppItemHolder;
+import com.yongf.googleplay.manager.DownloadManager;
 import com.yongf.googleplay.protocol.AppProtocol;
 
 import java.io.IOException;
@@ -37,6 +39,7 @@ public class AppFragment extends BaseFragment {
 
     private List<AppInfoBean> mData;
     private AppProtocol mProtocol;
+    private AppAdapter mAdapter;
 
     /**
      * 返回成功的视图
@@ -49,7 +52,8 @@ public class AppFragment extends BaseFragment {
         ListView listView = ListViewFactory.getListView();
 
         //设置适配器
-        listView.setAdapter(new AppAdapter(listView, mData));
+        mAdapter = new AppAdapter(listView, mData);
+        listView.setAdapter(mAdapter);
 
         return listView;
     }
@@ -77,6 +81,34 @@ public class AppFragment extends BaseFragment {
         }
 
         return LoadingPager.LoadedResult.ERROR;
+    }
+
+    @Override
+    public void onResume() {
+        //重新添加监听
+        if (mAdapter != null) {
+            List<AppItemHolder> appItemHolders = mAdapter.getAppItemHolders();
+            for (AppItemHolder holder : appItemHolders) {
+                DownloadManager.getInstance().addObserver(holder);
+            }
+            //手动刷新
+            mAdapter.notifyDataSetChanged();
+        }
+
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        //移除监听
+        if (mAdapter != null) {
+            List<AppItemHolder> appItemHolders = mAdapter.getAppItemHolders();
+            for (AppItemHolder holder : appItemHolders) {
+                DownloadManager.getInstance().deleteObserver(holder);
+            }
+        }
+
+        super.onPause();
     }
 
     private class AppAdapter extends AppItemAdapter {

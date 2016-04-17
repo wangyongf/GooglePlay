@@ -1,11 +1,11 @@
 /*
  * Copyright (C) 1996-2016 YONGF Inc.All Rights Reserved.
- * Scott Wang blog.54yongf.com | blog.csdn.net/yongf2014 		
- * 文件名: DownloadManager						
- * 描述: 								
- * 修改历史: 
+ * Scott Wang blog.54yongf.com | blog.csdn.net/yongf2014
+ * 文件名: DownloadManager
+ * 描述:
+ * 修改历史:
  * 版本号    作者                日期              简要介绍相关操作
- *  1.0         Scott Wang     2016/4/16       Create	
+ *  1.0         Scott Wang     2016/4/16       Create
  */
 
 package com.yongf.googleplay.manager;
@@ -23,6 +23,7 @@ import com.yongf.googleplay.factory.ThreadPoolFactory;
 import com.yongf.googleplay.utils.CommonUtils;
 import com.yongf.googleplay.utils.FileUtils;
 import com.yongf.googleplay.utils.IOUtils;
+import com.yongf.googleplay.utils.LogUtils;
 import com.yongf.googleplay.utils.UIUtils;
 
 import java.io.File;
@@ -89,7 +90,7 @@ public class DownloadManager {
         info.state = STATE_WAITINGDOWNLOAD;
         notifyObservers(info);
 
-        //得到线程池，执行任务
+        //从线程池中获取线程，执行任务
         DownLoadTask task = new DownLoadTask(info);
         info.task = task;               //DownloadInfo的task（下载任务）
         ThreadPoolFactory.getDownloadPool().execute(task);
@@ -262,10 +263,14 @@ public class DownloadManager {
 
                 ResponseStream responseStream = httpUtils.sendSync(HttpRequest.HttpMethod.GET, url, params);
 
+                if (mInfo.packageName.equals("com.itheima.www")) {
+                    LogUtils.sf(mInfo.max + "");
+                }
+
                 if (200 == responseStream.getStatusCode()) {
                     InputStream in = null;
                     FileOutputStream out = null;
-//                    boolean isPause = false;
+                    boolean isPause = false;
                     try {
                         in = responseStream.getBaseStream();
                         File saveFile = new File(mInfo.savePath);
@@ -276,7 +281,7 @@ public class DownloadManager {
 
                         while ((len = in.read(buffer)) != -1) {
                             if (mInfo.state == STATE_PAUSEDOWNLOAD) {
-//                                isPause = true;
+                                isPause = true;
                                 break;
                             }
 
@@ -287,25 +292,28 @@ public class DownloadManager {
                             notifyObservers(mInfo);
                         }
 
-                        if (mInfo.currentProgress == mInfo.max) {       //下载完成了
-                            mInfo.state = STATE_DOWNLOADED;
-                            notifyObservers(mInfo);
-                        } else {                //暂停了
-                            mInfo.state = STATE_PAUSEDOWNLOAD;
-                            notifyObservers(mInfo);
-                        }
-
-//                        if (isPause) {// 用户暂停了下载走到这里来了
-//                            /*############### 当前状态: 暂停 ###############*/
-//                            mInfo.state = STATE_PAUSEDOWNLOAD;
-//                            notifyObservers(mInfo);
-//							/*#######################################*/
-//                        } else {// 下载完成走到这里来
-//							/*############### 当前状态: 下载完成 ###############*/
+//                        if (mInfo.currentProgress == mInfo.max) {       //下载完成了
 //                            mInfo.state = STATE_DOWNLOADED;
 //                            notifyObservers(mInfo);
-//							/*#######################################*/
+//                        } else {                //暂停了
+//                            mInfo.state = STATE_PAUSEDOWNLOAD;
+//                            notifyObservers(mInfo);
 //                        }
+                        if (mInfo.packageName.equals("com.itheima.www")) {
+                            LogUtils.sf(mInfo.currentProgress + " " + isPause);
+                        }
+
+                        if (isPause) {// 用户暂停了下载走到这里来了
+                            /*############### 当前状态: 暂停 ###############*/
+                            mInfo.state = STATE_PAUSEDOWNLOAD;
+                            notifyObservers(mInfo);
+                            /*#######################################*/
+                        } else {// 下载完成走到这里来
+							/*############### 当前状态: 下载完成 ###############*/
+                            mInfo.state = STATE_DOWNLOADED;
+                            notifyObservers(mInfo);
+							/*#######################################*/
+                        }
                     } finally {
                         IOUtils.close(out, in);
                     }
