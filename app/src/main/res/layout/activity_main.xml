@@ -37,12 +37,12 @@
             yongf:pstsSelectedTabTextSize="18sp"
 
             yongf:pstsTabTextColor="@color/tab_text_normal"
-            yongf:pstsTabTextSize="16sp"></com.astuetz.PagerSlidingTabStripExtends>
+            yongf:pstsTabTextSize="16sp"/>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/main_viewpager"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"></android.support.v4.view.ViewPager>
+            android:layout_height="fill_parent"/>
     </LinearLayout>
 
 </android.support.v4.widget.DrawerLayout>

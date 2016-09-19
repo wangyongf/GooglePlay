@@ -93,12 +93,14 @@ public class Constants {
         /**
          * 小米3 IP
          */
-        public static final String IP2 = "http://192.168.1.102:8080/";
+        public static final String IP2 = "http://192.168.1.104:8080/";
+
+        public static final String IP3 = "http://121.42.59.52:8080/";
 
         /**
          * 服务器地址(Genymotion)
          */
-        public static final String BASE_URL = IP2 + "GooglePlayServer/";
+        public static final String BASE_URL = IP3 + "GooglePlayServer/";
 
         /**
          * 图片地址
