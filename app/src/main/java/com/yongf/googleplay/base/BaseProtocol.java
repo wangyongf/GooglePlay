@@ -157,7 +157,8 @@ public abstract class BaseProtocol<T> {
         BufferedWriter writer = null;
         try {
             writer = new BufferedWriter(new FileWriter(cacheFile));
-            writer.write(System.currentTimeMillis() + "\r\n");          //第一行写入插入时间
+            writer.write(System.currentTimeMillis() + "");          //第一行写入插入时间，注意，这里的换行符
+            writer.newLine();
             writer.write(jsonString);
         } catch (IOException e) {
             e.printStackTrace();

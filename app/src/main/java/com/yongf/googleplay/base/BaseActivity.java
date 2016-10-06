@@ -12,7 +12,7 @@ package com.yongf.googleplay.base;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.yongf.googleplay.activity.MainActivity;
@@ -29,9 +29,9 @@ import java.util.List;
  * @see
  * @since GooglePlay1.0
  */
-public abstract class BaseActivity extends ActionBarActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
-    private List<ActionBarActivity> mActivityList = new LinkedList<>();
+    private List<BaseActivity> mActivityList = new LinkedList<>();
     private long mPreTime;
     private Activity mCurActivity;
 
@@ -103,7 +103,7 @@ public abstract class BaseActivity extends ActionBarActivity {
      * 完全退出
      */
     public void exit() {
-        for (ActionBarActivity activity : mActivityList) {
+        for (BaseActivity activity : mActivityList) {
             activity.finish();
         }
     }
