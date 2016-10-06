@@ -6,6 +6,7 @@
  * 修改历史: 
  * 版本号    作者                日期              简要介绍相关操作
  *  1.0         Scott Wang     2016/4/15       新增：Create
+ *  1.1         Scott Wang     16-10-6           新增：BaseActivity的基类改为AppcompatActivity
  */
 
 package com.yongf.googleplay.base;
@@ -25,7 +26,7 @@ import java.util.List;
  * 共同属性、共同方法
  *
  * @author Scott Wang
- * @version 1.0, 2016/4/15
+ * @version 1.1, 2016/4/15
  * @see
  * @since GooglePlay1.0
  */
