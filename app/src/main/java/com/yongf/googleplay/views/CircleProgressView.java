@@ -125,5 +125,6 @@ public class CircleProgressView extends LinearLayout {
             paint.setAntiAlias(true);           //消除锯齿
             canvas.drawArc(oval, startAngle, sweepAngle, useCenter, paint);
         }
+        
     }
 }

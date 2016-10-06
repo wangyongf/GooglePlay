@@ -40,36 +40,10 @@ public class FileUtils {
     public static final String ICON_DIR = "icon";
 
     /**
-     * 判断SD卡是否挂载
-     */
-    public static boolean isSDCardAvailable() {
-        if (Environment.MEDIA_MOUNTED.equals(Environment
-                .getExternalStorageState())) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * 获取下载目录
      */
     public static String getDownloadDir() {
         return getDir(DOWNLOAD_DIR);
-    }
-
-    /**
-     * 获取缓存目录
-     */
-    public static String getCacheDir() {
-        return getDir(CACHE_DIR);
-    }
-
-    /**
-     * 获取icon目录
-     */
-    public static String getIconDir() {
-        return getDir(ICON_DIR);
     }
 
     /**
@@ -90,6 +64,14 @@ public class FileUtils {
         } else {
             return null;
         }
+    }
+
+    /**
+     * 判断SD卡是否挂载
+     */
+    public static boolean isSDCardAvailable() {
+        return Environment.MEDIA_MOUNTED.equals(Environment
+                .getExternalStorageState());
     }
 
     /**
@@ -125,6 +107,20 @@ public class FileUtils {
             return file.mkdirs();
         }
         return true;
+    }
+
+    /**
+     * 获取缓存目录
+     */
+    public static String getCacheDir() {
+        return getDir(CACHE_DIR);
+    }
+
+    /**
+     * 获取icon目录
+     */
+    public static String getIconDir() {
+        return getDir(ICON_DIR);
     }
 
     /**
@@ -204,6 +200,7 @@ public class FileUtils {
      * @param is       数据流
      * @param path     文件路径
      * @param recreate 如果文件存在，是否需要删除重建
+     *
      * @return 是否写入成功
      */
     public static boolean writeFile(InputStream is, String path,
@@ -241,6 +238,20 @@ public class FileUtils {
      * @param content 需要写入的字符串
      * @param path    文件路径名称
      * @param append  是否以添加的模式写入
+     *
+     * @return 是否写入成功
+     */
+    public static boolean writeFile(String content, String path, boolean append) {
+        return writeFile(content.getBytes(), path, append);
+    }
+
+    /**
+     * 把字符串数据写入文件
+     *
+     * @param content 需要写入的字符串
+     * @param path    文件路径名称
+     * @param append  是否以添加的模式写入
+     *
      * @return 是否写入成功
      */
     public static boolean writeFile(byte[] content, String path, boolean append) {
@@ -268,18 +279,6 @@ public class FileUtils {
             IOUtils.close(raf);
         }
         return res;
-    }
-
-    /**
-     * 把字符串数据写入文件
-     *
-     * @param content 需要写入的字符串
-     * @param path    文件路径名称
-     * @param append  是否以添加的模式写入
-     * @return 是否写入成功
-     */
-    public static boolean writeFile(String content, String path, boolean append) {
-        return writeFile(content.getBytes(), path, append);
     }
 
     /**
