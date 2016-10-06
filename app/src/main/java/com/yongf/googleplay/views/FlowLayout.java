@@ -205,12 +205,8 @@ public class FlowLayout extends ViewGroup {
             // 预计使用的宽度
             float planWidth = mUsedWidth + mHorizontalSpace + viewWidth;
 
-            if (planWidth > mMaxWidth) {
-                // 加不进去
-                return false;
-            }
+            return planWidth <= mMaxWidth;
 
-            return true;
         }
 
         /**
@@ -226,7 +222,7 @@ public class FlowLayout extends ViewGroup {
 
             int size = mViews.size();
             // 判断已经使用的宽度是否小于最大的宽度
-            float extra = 0;
+            float extra = 0;            //多余的宽度，需要平分到各个View上！
             float widthAvg = 0;
             if (mMaxWidth > mUsedWidth) {
                 extra = mMaxWidth - mUsedWidth;

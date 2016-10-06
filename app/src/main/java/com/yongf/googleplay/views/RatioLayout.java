@@ -77,23 +77,25 @@ public class RatioLayout extends FrameLayout {
             //得到自身的宽度
             int width = MeasureSpec.getSize(widthMeasureSpec);
 
-            //得到孩子的宽度
-            int childWidth = width - getPaddingLeft() - getPaddingRight();
-
-            //控件宽度 / 控件高度 = mRatio
-
-            //计算孩子的高度
-            int childHeight = (int) (childWidth / mRatio + .5f);
+//            //得到孩子的宽度
+//            int childWidth = width - getPaddingLeft() - getPaddingRight();
+//
+//            //控件宽度 / 控件高度 = mRatio
+//
+//            //计算孩子的高度
+//            int childHeight = (int) (childWidth / mRatio + .5f);
 
             //计算自身的高度
-            int height = childHeight + getPaddingTop() + getPaddingBottom();
+//            int height = childHeight + getPaddingTop() + getPaddingBottom();
+            int height = (int) (width / mRatio + .5f);
 
-            //主动测绘孩子，控制孩子的大小
-            int childWidthMeasureSpec = MeasureSpec.makeMeasureSpec(childWidth, MeasureSpec.EXACTLY);
-            int childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(childHeight, MeasureSpec.EXACTLY);
+//            //主动测绘孩子，控制孩子的大小
+            int childWidthMeasureSpec = MeasureSpec.makeMeasureSpec(width - getPaddingLeft() - getPaddingRight(), MeasureSpec.EXACTLY);
+            int childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(height - getPaddingTop() - getPaddingBottom(), MeasureSpec.EXACTLY);
             measureChildren(childWidthMeasureSpec, childHeightMeasureSpec);
 
             //设置自己的测绘结果
+            //其实根本不用设置孩子的宽高，因为已经全部设置成MATCH_PARENT了！
             setMeasuredDimension(width, height);
         } else if (heightMode == MeasureSpec.EXACTLY && mRatio != 0 && mRelative == FIXED_HEIGHT) {
             //高度固定，已知图片的宽高比，动态改变控件的宽度
@@ -102,17 +104,18 @@ public class RatioLayout extends FrameLayout {
             int height = MeasureSpec.getSize(heightMeasureSpec);
 
             //得到孩子的高度
-            int childHeight = height - getPaddingBottom() - getPaddingTop();
-
-            //计算控件的宽度
-            int childWidth = (int) (height * mRatio + .5f);
+//            int childHeight = height - getPaddingBottom() - getPaddingTop();
+//
+//            //计算控件的宽度
+//            int childWidth = (int) (height * mRatio + .5f);
 
             //得到自身的宽度
-            int width = childWidth + getPaddingLeft() + getPaddingRight();
+//            int width = childWidth + getPaddingLeft() + getPaddingRight();
+            int width = (int) (mRatio * height + .5f);
 
             //主动测绘孩子，控制孩子的大小
-            int childWidthMeasureSpec = MeasureSpec.makeMeasureSpec(childWidth, MeasureSpec.EXACTLY);
-            int childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(childHeight, MeasureSpec.EXACTLY);
+            int childWidthMeasureSpec = MeasureSpec.makeMeasureSpec(width - getPaddingLeft() - getPaddingRight(), MeasureSpec.EXACTLY);
+            int childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(height - getPaddingTop() - getPaddingBottom(), MeasureSpec.EXACTLY);
             measureChildren(childWidthMeasureSpec, childHeightMeasureSpec);
 
             //设置自己的测绘结果
