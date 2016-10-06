@@ -8,6 +8,7 @@
  *  1.0         Scott Wang     2016/4/5       Create
  *  1.1         Scott Wang     2016/4/10     抽象特殊ViewHolder，加入加载更多列表项
  *  1.2         Scott Wang     2016/4/15     修复：由于首页轮播图导致的点击事件错位
+ *  1.3         Scott Wang     16-10-6         变更：向线程池提交任务使用submit，不再使用execute
  */
 
 package com.yongf.googleplay.base;
@@ -174,7 +175,7 @@ public abstract class SuperBaseAdapter<ITEM_BEAN_TYPE> extends BaseAdapter imple
             mLoadMoreHolder.setDataAndRefreshHolderView(state);
 
             mLoadMoreTask = new LoadMoreTask();
-            ThreadPoolFactory.getNormalPool().execute(mLoadMoreTask);
+            ThreadPoolFactory.getNormalPool().submit(mLoadMoreTask);
         }
     }
 
