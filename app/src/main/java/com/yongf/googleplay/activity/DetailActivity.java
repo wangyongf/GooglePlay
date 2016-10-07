@@ -9,11 +9,14 @@
  *  1.1         Scott Wang     2016/4/15       新增：应用详情页跳转，数据加载，数据获取协议封装，信息部分
  *  1.2         Scott Wang     2016/4/15       新增：详情页安全部分数据展示、折叠属性动画
  *  1.3         Scott Wang     2016/4/16       优化：部分封装，详情页的返回应用列表，标题栏显示应用名称
+ *  1.4         Scott Wang     16-10-7           优化：重构代码，将初始化view的代码放到initView方法中
+ *  1.5         Scott Wang     16-10-7           优化：不再在代码中设置ActionBar，重构页面布局
  */
 
 package com.yongf.googleplay.activity;
 
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -25,6 +28,7 @@ import com.yongf.googleplay.R;
 import com.yongf.googleplay.base.BaseActivity;
 import com.yongf.googleplay.base.LoadingPager;
 import com.yongf.googleplay.bean.AppInfoBean;
+import com.yongf.googleplay.conf.Convention;
 import com.yongf.googleplay.holder.AppDetailBottomHolder;
 import com.yongf.googleplay.holder.AppDetailDesHolder;
 import com.yongf.googleplay.holder.AppDetailInfoHolder;
@@ -32,6 +36,7 @@ import com.yongf.googleplay.holder.AppDetailPicHolder;
 import com.yongf.googleplay.holder.AppDetailSecureHolder;
 import com.yongf.googleplay.manager.DownloadManager;
 import com.yongf.googleplay.protocol.DetailProtocol;
+import com.yongf.googleplay.utils.LogUtils;
 import com.yongf.googleplay.utils.UIUtils;
 
 import java.io.IOException;
@@ -40,11 +45,14 @@ import java.io.IOException;
  * 应用详情页
  *
  * @author Scott Wang
- * @version 1.3, 2016/4/14
+ * @version 1.5, 16-10-7
  * @see
  * @since GooglePlay1.0
  */
 public class DetailActivity extends BaseActivity {
+
+
+    private static final String TAG = "DetailActivity";
 
     @ViewInject(R.id.app_detail_bottom)
     FrameLayout mContainerBottom;
@@ -66,15 +74,19 @@ public class DetailActivity extends BaseActivity {
     private AppInfoBean mData;
     private String mName;
     private AppDetailBottomHolder mAppDetailBottomHolder;
+    private Toolbar mToolbar;
 
     /**
      * 页面初始化
      */
     @Override
     public void init() {
-        mPackageName = getIntent().getStringExtra("packageName");
-        mName = getIntent().getStringExtra("name");
+        mPackageName = getIntent().getStringExtra(Convention.APP_PACKAGE_NAME);
+        mName = getIntent().getStringExtra(Convention.APP_NAME);
+    }
 
+    @Override
+    public void initView() {
         mLoadingPager = new LoadingPager(UIUtils.getContext()) {
             @Override
             public View initSuccessView() {
@@ -86,69 +98,36 @@ public class DetailActivity extends BaseActivity {
                 return onInitData();
             }
         };
-
-        //触发加载数据
-        mLoadingPager.loadData();
-
         setContentView(mLoadingPager);
 
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         initActionBar();
     }
 
     @Override
-    public void initView() {
-
-    }
-
-    @Override
-    public void initActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setTitle(mName);
-
-        //显示返回按钮
-        actionBar.setDisplayHomeAsUpEnabled(true);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-
-                break;
-        }
-
-        return super.onOptionsItemSelected(item);
+    public void initData() {
+        //触发加载数据
+        mLoadingPager.loadData();
     }
 
     /**
-     * 初始化数据
+     * 界面可见的时候重新添加观察者
      */
-    private LoadingPager.LoadedResult onInitData() {
-        //发起网络请求
-        DetailProtocol protocol = new DetailProtocol(mPackageName);
-
-        try {
-            mData = protocol.loadData(0);
-
-            if (mData != null) {
-                return LoadingPager.LoadedResult.SUCCESS;
-            }
-        } catch (HttpException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+    @Override
+    protected void onResume() {
+        if (mAppDetailBottomHolder != null) {
+            //开启监听的时候，手动获取最新状态
+            mAppDetailBottomHolder.addObserverAndRefresh();
         }
 
-        return LoadingPager.LoadedResult.ERROR;
+        super.onResume();
     }
 
     /**
      * 初始化视图
      */
     private View onInitView() {
-        View view = View.inflate(UIUtils.getContext(), R.layout.activity_detail, null);
+        View view = View.inflate(DetailActivity.this, R.layout.activity_detail, null);
 
         ViewUtils.inject(this, view);
 
@@ -185,6 +164,56 @@ public class DetailActivity extends BaseActivity {
     }
 
     /**
+     * 初始化数据
+     */
+    private LoadingPager.LoadedResult onInitData() {
+        //发起网络请求
+        DetailProtocol protocol = new DetailProtocol(mPackageName);
+
+        try {
+            mData = protocol.loadData(0);
+
+            if (mData != null) {
+                return LoadingPager.LoadedResult.SUCCESS;
+            }
+        } catch (HttpException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return LoadingPager.LoadedResult.ERROR;
+    }
+
+    public void initActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setTitle(mName);
+        String temp = "";
+        if (actionBar == null) {
+            temp = "false";
+        } else {
+            temp = "true";
+        }
+        LogUtils.i(TAG, "initActionBar: " + temp);
+
+        //显示返回按钮
+        actionBar.setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    /**
      * 界面不可见的时候移除观察者
      */
     @Override
@@ -194,18 +223,5 @@ public class DetailActivity extends BaseActivity {
         }
 
         super.onPause();
-    }
-
-    /**
-     * 界面可见的时候重新添加观察者
-     */
-    @Override
-    protected void onResume() {
-        if (mAppDetailBottomHolder != null) {
-            //开启监听的时候，手动获取最新状态
-            mAppDetailBottomHolder.addObserverAndRefresh();
-        }
-
-        super.onResume();
     }
 }

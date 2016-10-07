@@ -20,7 +20,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.yongf.googleplay.R;
 import com.yongf.googleplay.base.BaseHolder;
 import com.yongf.googleplay.bean.SubjectInfoBean;
-import com.yongf.googleplay.conf.Constants;
+import com.yongf.googleplay.conf.Convention;
 import com.yongf.googleplay.utils.BitmapHelper;
 import com.yongf.googleplay.utils.UIUtils;
 
@@ -57,6 +57,6 @@ public class SubjectHolder extends BaseHolder<SubjectInfoBean> {
 
         mIvIcon.setImageResource(R.drawable.ic_default);
 
-        BitmapHelper.display(mIvIcon, Constants.URLs.IMAGE_BASE_URL + data.url);
+        BitmapHelper.display(mIvIcon, Convention.URLs.IMAGE_BASE_URL + data.url);
     }
 }

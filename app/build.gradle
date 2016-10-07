@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 24
     buildToolsVersion "24.0.1"
 
     useLibrary 'org.apache.http.legacy'
@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "com.yongf.googleplay"
         minSdkVersion 14
-        targetSdkVersion 23
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
     }
@@ -29,9 +29,13 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    //    compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
     compile project(':PagerSlidingTabStrip_library')
     compile files('libs/xutils_library.jar')
     compile 'com.google.code.gson:gson:2.6.2'
+
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:design:24.2.1'
+    compile 'com.android.support:support-v4:24.2.1'
+    compile 'com.android.support:support-vector-drawable:24.2.1'
+    testCompile 'junit:junit:4.12'
 }

@@ -19,7 +19,7 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseStream;
 import com.lidroid.xutils.http.client.HttpRequest;
-import com.yongf.googleplay.conf.Constants;
+import com.yongf.googleplay.conf.Convention;
 import com.yongf.googleplay.utils.FileUtils;
 import com.yongf.googleplay.utils.IOUtils;
 import com.yongf.googleplay.utils.LogUtils;
@@ -76,7 +76,7 @@ public abstract class BaseProtocol<T> {
                 //读取第一行
                 String expirationTime = reader.readLine();
 
-                if (System.currentTimeMillis() - Long.parseLong(expirationTime) < Constants.EXPIRE_TIME) {
+                if (System.currentTimeMillis() - Long.parseLong(expirationTime) < Convention.EXPIRE_TIME) {
 
                     //读取缓存内容
                     String jsonString = reader.readLine();
@@ -132,7 +132,7 @@ public abstract class BaseProtocol<T> {
 
     private String getNetworkData(int index) throws HttpException, IOException {
         HttpUtils httpUtils = new HttpUtils();
-        String url = Constants.URLs.BASE_URL + getInterfaceKey();
+        String url = Convention.URLs.BASE_URL + getInterfaceKey();
         RequestParams params = new RequestParams();
 
         Map<String, String> extraParams = getExtraParams();

@@ -18,7 +18,7 @@ import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseStream;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.yongf.googleplay.bean.AppInfoBean;
-import com.yongf.googleplay.conf.Constants;
+import com.yongf.googleplay.conf.Convention;
 import com.yongf.googleplay.factory.ThreadPoolFactory;
 import com.yongf.googleplay.utils.CommonUtils;
 import com.yongf.googleplay.utils.FileUtils;
@@ -253,7 +253,7 @@ public class DownloadManager {
                 mInfo.currentProgress = initRange;          //处理初始进度
 
                 //下载地址
-                String url = Constants.URLs.DOWNLOAD_BASE_URL;
+                String url = Convention.URLs.DOWNLOAD_BASE_URL;
                 HttpUtils httpUtils = new HttpUtils();
 
                 //相关参数

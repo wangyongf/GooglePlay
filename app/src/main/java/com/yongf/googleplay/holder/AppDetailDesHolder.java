@@ -173,13 +173,13 @@ public class AppDetailDesHolder extends BaseHolder<AppInfoBean> implements View.
     /**
      * 指定行高
      *
-     * @param index 指定textview的内容
+     * @param index 指定textview的内容所占行数
      * @param data
      * @return
      */
     private int getShortHeight(int index, AppInfoBean data) {
         TextView tempTextView = new TextView(UIUtils.getContext());
-        tempTextView.setLines(7);
+        tempTextView.setLines(index);
         tempTextView.setText(data.des);
 
         tempTextView.measure(0, 0);

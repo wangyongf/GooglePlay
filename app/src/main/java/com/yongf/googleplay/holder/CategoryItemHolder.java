@@ -22,7 +22,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.yongf.googleplay.R;
 import com.yongf.googleplay.base.BaseHolder;
 import com.yongf.googleplay.bean.CategoryInfoBean;
-import com.yongf.googleplay.conf.Constants;
+import com.yongf.googleplay.conf.Convention;
 import com.yongf.googleplay.utils.BitmapHelper;
 import com.yongf.googleplay.utils.StringUtils;
 import com.yongf.googleplay.utils.UIUtils;
@@ -84,7 +84,7 @@ public class CategoryItemHolder extends BaseHolder<CategoryInfoBean> {
         if (!StringUtils.isEmpty(name) && !StringUtils.isEmpty(url)) {
             tvName.setText(name);
             ivIcon.setImageResource(R.drawable.ic_default);
-            BitmapHelper.display(ivIcon, Constants.URLs.IMAGE_BASE_URL + url);
+            BitmapHelper.display(ivIcon, Convention.URLs.IMAGE_BASE_URL + url);
             ((ViewGroup) tvName.getParent()).setVisibility(View.VISIBLE);
 
             ((ViewGroup) tvName.getParent()).setOnClickListener(new View.OnClickListener() {

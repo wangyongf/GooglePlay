@@ -21,7 +21,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.yongf.googleplay.R;
 import com.yongf.googleplay.base.BaseHolder;
 import com.yongf.googleplay.bean.AppInfoBean;
-import com.yongf.googleplay.conf.Constants;
+import com.yongf.googleplay.conf.Convention;
 import com.yongf.googleplay.utils.BitmapHelper;
 import com.yongf.googleplay.utils.UIUtils;
 import com.yongf.googleplay.views.RatioLayout;
@@ -63,7 +63,7 @@ public class AppDetailPicHolder extends BaseHolder<AppInfoBean> {
             String url = picUrls.get(i);
             ImageView ivPic = new ImageView(UIUtils.getContext());
             ivPic.setImageResource(R.drawable.ic_default);          //默认图片
-            BitmapHelper.display(ivPic, Constants.URLs.IMAGE_BASE_URL + url);
+            BitmapHelper.display(ivPic, Convention.URLs.IMAGE_BASE_URL + url);
 
             ViewGroup.LayoutParams ivParams = new ViewGroup.LayoutParams(childWidth,
                     UIUtils.dip2px(280));

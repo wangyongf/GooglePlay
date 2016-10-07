@@ -10,7 +10,7 @@
 
 package com.yongf.googleplay.factory;
 
-import com.yongf.googleplay.conf.Constants;
+import com.yongf.googleplay.conf.Convention;
 import com.yongf.googleplay.manager.ThreadPoolProxy;
 
 /**
@@ -39,9 +39,9 @@ public class ThreadPoolFactory {
             synchronized (ThreadPoolFactory.class) {
                 if (mNormalPool == null) {
                     mNormalPool = new ThreadPoolProxy(
-                            Constants.NORMAL_POOL_CORE_POOL_SIZE,
-                            Constants.NORMAL_POOL_MAX_POOL_SIZE,
-                            Constants.NORMAL_POOL_KEEP_ALIVE_TIME);
+                            Convention.NORMAL_POOL_CORE_POOL_SIZE,
+                            Convention.NORMAL_POOL_MAX_POOL_SIZE,
+                            Convention.NORMAL_POOL_KEEP_ALIVE_TIME);
                 }
             }
         }
@@ -59,9 +59,9 @@ public class ThreadPoolFactory {
             synchronized (ThreadPoolFactory.class) {
                 if (mDownloadPool == null) {
                     mDownloadPool = new ThreadPoolProxy(
-                            Constants.DOWNLOAD_POOL_CORE_POOL_SIZE,
-                            Constants.DOWNLOAD_POOL_MAX_POOL_SIZE,
-                            Constants.DOWNLOAD_POOL_KEEP_ALIVE_TIME);
+                            Convention.DOWNLOAD_POOL_CORE_POOL_SIZE,
+                            Convention.DOWNLOAD_POOL_MAX_POOL_SIZE,
+                            Convention.DOWNLOAD_POOL_KEEP_ALIVE_TIME);
                 }
             }
         }

@@ -23,7 +23,7 @@ import com.yongf.googleplay.base.BaseFragment;
 import com.yongf.googleplay.base.LoadingPager;
 import com.yongf.googleplay.bean.AppInfoBean;
 import com.yongf.googleplay.bean.HomeBean;
-import com.yongf.googleplay.conf.Constants;
+import com.yongf.googleplay.conf.Convention;
 import com.yongf.googleplay.factory.ListViewFactory;
 import com.yongf.googleplay.holder.AppItemHolder;
 import com.yongf.googleplay.holder.PictureHolder;
@@ -163,7 +163,7 @@ public class HomeFragment extends BaseFragment {
         @Override
         public List<AppInfoBean> onLoadMore() throws Exception {
             //休眠一下
-            SystemClock.sleep(Constants.LOADING_MORE_DURATION);
+            SystemClock.sleep(Convention.LOADING_MORE_DURATION);
 
             return loadMore(mData.size());
         }

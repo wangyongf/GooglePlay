@@ -47,7 +47,7 @@ import java.util.Locale;
 public class PagerSlidingTabStripExtends extends HorizontalScrollView {
 
     public interface IconTabProvider {
-		public int getPageIconResId(int position);
+		int getPageIconResId(int position);
 	}
 
 	// @formatter:off
@@ -370,7 +370,7 @@ public class PagerSlidingTabStripExtends extends HorizontalScrollView {
 
         //绘制Indicator
 //		canvas.drawRect(lineLeft, height - indicatorHeight, lineRight, height, rectPaint);      //这里是画矩形
-        float triangleWidth = 30;
+        float triangleWidth = 50;
 
         float x1 = (lineRight - lineLeft) / 2 + lineLeft;
         float y1 = height - indicatorHeight;

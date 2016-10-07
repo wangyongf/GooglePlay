@@ -22,7 +22,7 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.yongf.googleplay.R;
 import com.yongf.googleplay.base.BaseHolder;
-import com.yongf.googleplay.conf.Constants;
+import com.yongf.googleplay.conf.Convention;
 import com.yongf.googleplay.utils.BitmapHelper;
 import com.yongf.googleplay.utils.UIUtils;
 
@@ -149,7 +149,7 @@ public class PictureHolder extends BaseHolder<List<String>> {
          * 开始自动轮播
          */
         public void start() {
-            UIUtils.postTaskDelay(this, Constants.HOME_CAROUSEL_DURATION);
+            UIUtils.postTaskDelay(this, Convention.HOME_CAROUSEL_DURATION);
         }
 
         /**
@@ -192,7 +192,7 @@ public class PictureHolder extends BaseHolder<List<String>> {
             iv.setScaleType(ImageView.ScaleType.FIT_XY);
             iv.setImageResource(R.drawable.ic_default);
 
-            BitmapHelper.display(iv, Constants.URLs.IMAGE_BASE_URL + mData.get(position));
+            BitmapHelper.display(iv, Convention.URLs.IMAGE_BASE_URL + mData.get(position));
 
             container.addView(iv);
 

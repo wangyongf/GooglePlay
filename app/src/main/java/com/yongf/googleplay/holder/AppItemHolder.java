@@ -20,7 +20,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.yongf.googleplay.R;
 import com.yongf.googleplay.base.BaseHolder;
 import com.yongf.googleplay.bean.AppInfoBean;
-import com.yongf.googleplay.conf.Constants;
+import com.yongf.googleplay.conf.Convention;
 import com.yongf.googleplay.manager.DownloadInfo;
 import com.yongf.googleplay.manager.DownloadManager;
 import com.yongf.googleplay.utils.BitmapHelper;
@@ -87,7 +87,7 @@ public class AppItemHolder extends BaseHolder<AppInfoBean> implements View.OnCli
         mIvIcon.setImageResource(R.drawable.ic_default);
 
 //        BitmapUtils bitmapUtils = new BitmapUtils(UIUtils.getContext());
-        String uri = Constants.URLs.IMAGE_BASE_URL + data.iconUrl;
+        String uri = Convention.URLs.IMAGE_BASE_URL + data.iconUrl;
         BitmapHelper.display(mIvIcon, uri);
 
         mRbStar.setRating(data.stars);

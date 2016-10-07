@@ -20,7 +20,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
-import com.yongf.googleplay.conf.Constants;
+import com.yongf.googleplay.conf.Convention;
 import com.yongf.googleplay.factory.ThreadPoolFactory;
 import com.yongf.googleplay.holder.LoadMoreHolder;
 import com.yongf.googleplay.utils.UIUtils;
@@ -32,7 +32,7 @@ import java.util.List;
  * 基类Adapter
  *
  * @author Scott Wang
- * @version 1.2, 2016/4/5
+ * @version 1.3, 2016/4/5
  * @see
  * @since GooglePlay1.0
  */
@@ -255,7 +255,7 @@ public abstract class SuperBaseAdapter<ITEM_BEAN_TYPE> extends BaseAdapter imple
                 if (moreData == null) {
                     //没有更多数据了
                     state = LoadMoreHolder.STATE_NONE;
-                } else if (moreData.size() < Constants.PAGER_SIZE) {
+                } else if (moreData.size() < Convention.PAGER_SIZE) {
                     //假如规定每页返回20条数据
                     //没有更多了
                     state = LoadMoreHolder.STATE_NONE;

@@ -10,6 +10,7 @@
  *  1.2         Scott Wang     2016/4/5       新增：加入线程池相关常量（核心线程数、最大线程数、保持时间）
  *  1.3         Scott Wang     2016/4/10     新增：加入服务器相关地址
  *  1.4         Scott Wang     2016/4/16     新增：加入下载地址
+ *  1.5         Scott Wang     16-10-7         新增：APP_NAME, APP_PACKAGE_NAME
  */
 
 package com.yongf.googleplay.conf;
@@ -20,11 +21,11 @@ import com.yongf.googleplay.utils.LogUtils;
  * 常量
  *
  * @author Scott Wang
- * @version 1.4, 2016/4/3
+ * @version 1.5, 16-10-7
  * @see
  * @since GooglePlay1.0
  */
-public class Constants {
+public class Convention {
 
     /**
      * 关闭日志的显示
@@ -83,6 +84,16 @@ public class Constants {
      * 首页轮播图展示时长
      */
     public static final int HOME_CAROUSEL_DURATION = 4000;
+
+    /**
+     * 应用名称
+     */
+    public static final String APP_NAME = "name";
+
+    /**
+     * 应用包名
+     */
+    public static final String APP_PACKAGE_NAME = "packageName";
 
     public static final class URLs {
         /**

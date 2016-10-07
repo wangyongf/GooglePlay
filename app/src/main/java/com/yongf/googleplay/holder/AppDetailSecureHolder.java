@@ -24,7 +24,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.yongf.googleplay.R;
 import com.yongf.googleplay.base.BaseHolder;
 import com.yongf.googleplay.bean.AppInfoBean;
-import com.yongf.googleplay.conf.Constants;
+import com.yongf.googleplay.conf.Convention;
 import com.yongf.googleplay.utils.BitmapHelper;
 import com.yongf.googleplay.utils.UIUtils;
 
@@ -68,13 +68,13 @@ public class AppDetailSecureHolder extends BaseHolder<AppInfoBean> implements Vi
         for (AppInfoBean.AppInfoSafeBean appInfoSafeBean : safeBeans) {
             ImageView ivIcon = new ImageView(UIUtils.getContext());
 
-            BitmapHelper.display(ivIcon, Constants.URLs.IMAGE_BASE_URL + appInfoSafeBean.safeUrl);
+            BitmapHelper.display(ivIcon, Convention.URLs.IMAGE_BASE_URL + appInfoSafeBean.safeUrl);
             mContainerPic.addView(ivIcon);
 
             LinearLayout ll = new LinearLayout(UIUtils.getContext());
             //描述图标
             ImageView ivDes = new ImageView(UIUtils.getContext());
-            BitmapHelper.display(ivDes, Constants.URLs.IMAGE_BASE_URL + appInfoSafeBean.safeDesUrl);
+            BitmapHelper.display(ivDes, Convention.URLs.IMAGE_BASE_URL + appInfoSafeBean.safeDesUrl);
             //描述内容
             TextView tvDes = new TextView(UIUtils.getContext());
             tvDes.setText(appInfoSafeBean.safeDes);

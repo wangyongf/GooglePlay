@@ -20,7 +20,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.yongf.googleplay.R;
 import com.yongf.googleplay.base.BaseHolder;
 import com.yongf.googleplay.bean.AppInfoBean;
-import com.yongf.googleplay.conf.Constants;
+import com.yongf.googleplay.conf.Convention;
 import com.yongf.googleplay.utils.BitmapHelper;
 import com.yongf.googleplay.utils.StringUtils;
 import com.yongf.googleplay.utils.UIUtils;
@@ -79,7 +79,7 @@ public class AppDetailInfoHolder extends BaseHolder<AppInfoBean> {
         mTvSize.setText(size);
 
         mIvIcon.setImageResource(R.drawable.ic_default);
-        BitmapHelper.display(mIvIcon, Constants.URLs.IMAGE_BASE_URL + data.iconUrl);
+        BitmapHelper.display(mIvIcon, Convention.URLs.IMAGE_BASE_URL + data.iconUrl);
 
         mRbStar.setRating(data.stars);
     }

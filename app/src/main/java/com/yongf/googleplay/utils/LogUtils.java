@@ -13,7 +13,7 @@ package com.yongf.googleplay.utils;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.yongf.googleplay.conf.Constants;
+import com.yongf.googleplay.conf.Convention;
 
 import java.util.List;
 
@@ -71,7 +71,7 @@ public class LogUtils {
     /**
      * 是否允许输出log
      */
-    private static int mDebuggable = Constants.DEBUG_LEVEL;
+    private static int mDebuggable = Convention.DEBUG_LEVEL;
 
     /**
      * 用于记时的变量

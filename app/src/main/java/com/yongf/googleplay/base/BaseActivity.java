@@ -7,6 +7,7 @@
  * 版本号    作者                日期              简要介绍相关操作
  *  1.0         Scott Wang     2016/4/15       新增：Create
  *  1.1         Scott Wang     16-10-6           新增：BaseActivity的基类改为AppcompatActivity
+ *  1.2         Scott Wang     16-10-7           优化：去除initActionBar方法，init方法用于预初始化数据
  */
 
 package com.yongf.googleplay.base;
@@ -26,7 +27,7 @@ import java.util.List;
  * 共同属性、共同方法
  *
  * @author Scott Wang
- * @version 1.1, 2016/4/15
+ * @version 1.2, 2016/4/15
  * @see
  * @since GooglePlay1.0
  */
@@ -48,29 +49,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         initView();
         initData();
         initEvent();
-        initActionBar();
 
         mActivityList.add(this);
     }
 
-    @Override
-    protected void onDestroy() {
-        mActivityList.remove(this);
-
-        super.onDestroy();
-    }
-
     /**
-     * 初始化
+     * 预先初始化一些必要组件
      */
     public void init() {
-
-    }
-
-    /**
-     * 初始化数据
-     */
-    public void initData() {
 
     }
 
@@ -80,24 +66,24 @@ public abstract class BaseActivity extends AppCompatActivity {
     public abstract void initView();
 
     /**
+     * 初始化数据
+     */
+    public void initData() {
+
+    }
+
+    /**
      * 初始化事件
      */
     public void initEvent() {
 
     }
 
-    /**
-     * 初始化ActionBar
-     */
-    public void initActionBar() {
-
-    }
-
     @Override
-    protected void onResume() {
-        mCurActivity = this;
+    protected void onDestroy() {
+        mActivityList.remove(this);
 
-        super.onResume();
+        super.onDestroy();
     }
 
     /**
@@ -125,5 +111,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
 
         super.onBackPressed();          //finish();
+    }
+
+    @Override
+    protected void onResume() {
+        mCurActivity = this;
+
+        super.onResume();
     }
 }
