@@ -10,10 +10,12 @@
  *  1.2         Scott Wang     2016/4/10     新增：侧边栏DrawerLayout
  *  1.3         Scott Wang     2016/4/16     优化：封装BaseActivity
  *  1.4         Scott Wang     16-10-7         新增：将侧边栏换成MD风格，引入NavigationView
+ *  1.5         Scott Wang     16-10-8         优化：将onNavigationItemSelected方法中的if换成switch
  */
 
 package com.yongf.googleplay.activity;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -39,7 +41,7 @@ import com.yongf.googleplay.utils.UIUtils;
  * 主界面
  *
  * @author Scott Wang
- * @version 1.4, 16-10-7
+ * @version 1.5, 16-10-7
  * @see
  * @since GooglePlay1.0
  */
@@ -159,22 +161,38 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+            case R.id.nav_camera:
 
-        if (id == R.id.nav_camera) {
 
-        } else if (id == R.id.nav_gallery) {
+                break;
+            case R.id.nav_gallery:
 
-        } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_manage) {
+                break;
+            case R.id.nav_slideshow:
 
-        } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+                break;
+            case R.id.nav_manage:
 
-        } else if (id == R.id.nav_recommend) {
 
+                break;
+            case R.id.nav_setting:          //设置界面
+                Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+                startActivity(intent);
+
+                break;
+            case R.id.nav_send:
+
+
+                break;
+            case R.id.nav_recommend:
+
+
+                break;
+            default:
+                break;
         }
 
         mDrawer.closeDrawer(GravityCompat.START);
