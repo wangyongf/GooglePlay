@@ -16,4 +16,47 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+
+
+    <!--SettingActivity样式！-->
+
+    <style name="bg_layout">
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@drawable/shape_bg</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">8.0dip</item>
+        <item name="android:layout_marginTop">10.0dip</item>
+        <item name="android:layout_marginRight">8.0dip</item>
+    </style>
+
+    <style name="bg_base_layout">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingTop">16.0dip</item>
+        <item name="android:paddingBottom">16.0dip</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="bg_top_layout" parent="@style/bg_base_layout">
+        <item name="android:background">@drawable/selector_top_bg</item>
+    </style>
+
+
+    <style name="bg_mid_layout" parent="@style/bg_base_layout">
+        <item name="android:background">@drawable/selector_mid_bg</item>
+    </style>
+
+
+    <style name="bg_bottom_layout" parent="@style/bg_base_layout">
+        <item name="android:background">@drawable/selector_bottom_bg</item>
+    </style>
+
+    <style name="bg_single_layout" parent="@style/bg_base_layout">
+        <item name="android:background">@drawable/selector_single_bg</item>
+    </style>
+
 </resources>

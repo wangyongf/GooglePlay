@@ -8,6 +8,7 @@
  *  1.0         Scott Wang     2016/4/15       新增：Create
  *  1.1         Scott Wang     16-10-6           新增：BaseActivity的基类改为AppcompatActivity
  *  1.2         Scott Wang     16-10-7           优化：去除initActionBar方法，init方法用于预初始化数据
+ *  1.3         Scott Wang     16-10-10         优化：优化init方法的注释
  */
 
 package com.yongf.googleplay.base;
@@ -27,7 +28,7 @@ import java.util.List;
  * 共同属性、共同方法
  *
  * @author Scott Wang
- * @version 1.2, 2016/4/15
+ * @version 1.3, 2016/4/15
  * @see
  * @since GooglePlay1.0
  */
@@ -55,6 +56,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * 预先初始化一些必要组件
+     * 用于初始化一些在initView, initData, initEvent方法中
+     * 都要用到的东西
      */
     public void init() {
 

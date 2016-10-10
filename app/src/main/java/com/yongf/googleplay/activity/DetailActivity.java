@@ -11,12 +11,12 @@
  *  1.3         Scott Wang     2016/4/16       优化：部分封装，详情页的返回应用列表，标题栏显示应用名称
  *  1.4         Scott Wang     16-10-7           优化：重构代码，将初始化view的代码放到initView方法中
  *  1.5         Scott Wang     16-10-7           优化：不再在代码中设置ActionBar，重构页面布局
+ *  1.6         Scott Wang     16-10-10         优化：移除mToolbar
  */
 
 package com.yongf.googleplay.activity;
 
 import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -45,7 +45,7 @@ import java.io.IOException;
  * 应用详情页
  *
  * @author Scott Wang
- * @version 1.5, 16-10-7
+ * @version 1.6, 16-10-7
  * @see
  * @since GooglePlay1.0
  */
@@ -74,7 +74,6 @@ public class DetailActivity extends BaseActivity {
     private AppInfoBean mData;
     private String mName;
     private AppDetailBottomHolder mAppDetailBottomHolder;
-    private Toolbar mToolbar;
 
     /**
      * 页面初始化
@@ -100,7 +99,6 @@ public class DetailActivity extends BaseActivity {
         };
         setContentView(mLoadingPager);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         initActionBar();
     }
 
@@ -189,7 +187,7 @@ public class DetailActivity extends BaseActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setTitle(mName);
-        String temp = "";
+        String temp;
         if (actionBar == null) {
             temp = "false";
         } else {

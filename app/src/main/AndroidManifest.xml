@@ -23,7 +23,9 @@
         <activity
             android:name=".activity.DetailActivity"
             android:theme="@style/Theme.AppCompat.Light" />
-        <activity android:name=".activity.SettingActivity"></activity>
+        <activity
+            android:name=".activity.SettingActivity"
+            android:theme="@style/Theme.AppCompat.Light" />
     </application>
 
 </manifest>
