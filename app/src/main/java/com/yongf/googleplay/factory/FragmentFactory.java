@@ -7,6 +7,7 @@
  * 版本号    作者                日期              简要介绍相关操作
  *  1.0         Scott Wang     2016/4/3       Create
  *  1.1         Scott Wang     2016/4/4       给工厂加入了缓存机制
+ *  1.2         Scott Wang     16-10-15       优化：移除冗余代码
  */
 
 package com.yongf.googleplay.factory;
@@ -46,6 +47,7 @@ public class FragmentFactory {
      * 获取Fragment的工厂
      *
      * @param position
+     *
      * @return
      */
     public static BaseFragment getFragment(int position) {
@@ -59,11 +61,6 @@ public class FragmentFactory {
 
             return fragment;
         }
-//        if (cacheFragment.containsKey(position)) {
-//            fragment = cacheFragment.get(position);
-//
-//            return fragment;
-//        }
 
         switch (position) {
             case FRAGMENT_HOME:     //主页
