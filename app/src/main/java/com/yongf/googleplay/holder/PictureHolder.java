@@ -5,7 +5,8 @@
  * 描述: 								
  * 修改历史: 
  * 版本号    作者                日期              简要介绍相关操作
- *  1.0         Scott Wang     2016/4/11       Create	
+ *  1.0         Scott Wang     2016/4/11       Create
+ *  1.1         Scott Wang     16-10-16         修复：修复首页轮播图不自动轮播的BUG
  */
 
 package com.yongf.googleplay.holder;
@@ -24,6 +25,7 @@ import com.yongf.googleplay.R;
 import com.yongf.googleplay.base.BaseHolder;
 import com.yongf.googleplay.conf.Convention;
 import com.yongf.googleplay.utils.BitmapHelper;
+import com.yongf.googleplay.utils.LogUtils;
 import com.yongf.googleplay.utils.UIUtils;
 
 import java.util.List;
@@ -32,11 +34,16 @@ import java.util.List;
  * 首页轮播图的容器
  *
  * @author Scott Wang
- * @version 1.0, 2016/4/11
+ * @version 1.1, 2016/4/11
  * @see
  * @since GooglePlay1.0
  */
 public class PictureHolder extends BaseHolder<List<String>> {
+
+    /**
+     * 轮播图自动滚动任务
+     */
+    public AutoScrollTask mAutoScrollTask;
 
     @ViewInject(R.id.item_home_picture_pager)
     ViewPager mViewPager;
@@ -93,9 +100,8 @@ public class PictureHolder extends BaseHolder<List<String>> {
 
                 for (int i = 0; i < mData.size(); i++) {
                     View indicatorView = mContainerIndicator.getChildAt(i);
-                    //还原背景
-                    indicatorView.setBackgroundResource(R.drawable.indicator_normal);
 
+                    //设置背景
                     if (i == position) {
                         indicatorView.setBackgroundResource(R.drawable.indicator_selected);
                     } else {
@@ -116,8 +122,8 @@ public class PictureHolder extends BaseHolder<List<String>> {
         mViewPager.setCurrentItem(index - diff);
 
         //自动轮播
-        final AutoScrollTask autoScrollTask = new AutoScrollTask();
-        autoScrollTask.start();
+        mAutoScrollTask = new AutoScrollTask();
+        mAutoScrollTask.start();
 
         //用户触摸的时候移除自动轮播的任务
         mViewPager.setOnTouchListener(new View.OnTouchListener() {
@@ -125,7 +131,7 @@ public class PictureHolder extends BaseHolder<List<String>> {
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        autoScrollTask.stop();
+                        mAutoScrollTask.stop();
 
                         break;
                     case MotionEvent.ACTION_MOVE:
@@ -133,7 +139,7 @@ public class PictureHolder extends BaseHolder<List<String>> {
 
                         break;
                     case MotionEvent.ACTION_UP:
-                        autoScrollTask.start();
+                        mAutoScrollTask.start();
 
                         break;
                 }
@@ -143,29 +149,37 @@ public class PictureHolder extends BaseHolder<List<String>> {
         });
     }
 
-    private class AutoScrollTask implements Runnable {
+    public class AutoScrollTask {
+
+        private Runnable mTask;
+
+        public AutoScrollTask() {
+            mTask = new Runnable() {
+                @Override
+                public void run() {
+                    int item = mViewPager.getCurrentItem();
+                    LogUtils.d("MainActivity", "item = " + item);
+                    mViewPager.setCurrentItem(++item);
+
+                    //再次开始
+                    start();
+                }
+            };
+        }
 
         /**
          * 开始自动轮播
          */
         public void start() {
-            UIUtils.postTaskDelay(this, Convention.HOME_CAROUSEL_DURATION);
+            LogUtils.d("MainActivity", "start================");
+            UIUtils.postTaskDelay(mTask, Convention.HOME_CAROUSEL_DURATION);
         }
 
         /**
          * 停止自动轮播
          */
         public void stop() {
-            UIUtils.removeTask(this);
-        }
-
-        @Override
-        public void run() {
-            int item = mViewPager.getCurrentItem();
-            mViewPager.setCurrentItem(item++);
-
-            //再次开始
-            start();
+            UIUtils.removeTask(mTask);
         }
     }
 
@@ -177,11 +191,6 @@ public class PictureHolder extends BaseHolder<List<String>> {
             }
 
             return 0;
-        }
-
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == object;
         }
 
         @Override
@@ -202,6 +211,11 @@ public class PictureHolder extends BaseHolder<List<String>> {
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((View) object);
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view == object;
         }
     }
 

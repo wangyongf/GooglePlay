@@ -8,6 +8,7 @@
  *  1.0         Scott Wang     2016/4/3       Create
  *  1.1         Scott Wang     2016/4/5       模拟首页数据(ListView)
  *  1.2         Scott Wang     2016/4/10     正式从服务器获取数据
+ *  1.3         Scott Wang     16-10-16       优化：当MainActivity活动停止时，移除轮播图定时事件
  */
 
 package com.yongf.googleplay.fragment;
@@ -37,7 +38,7 @@ import java.util.List;
  * 应用主页面
  *
  * @author Scott Wang
- * @version 1.2, 2016/4/4
+ * @version 1.3, 2016/4/4
  * @see
  * @since GooglePlay1.0
  */
@@ -47,6 +48,7 @@ public class HomeFragment extends BaseFragment {
     private List<String> mPictures;          //轮播图
     private HomeProtocol mProtocol;
     private HomeAdapter mAdapter;
+    private PictureHolder mPictureHolder;
 
     /**
      * 返回成功的视图
@@ -59,12 +61,12 @@ public class HomeFragment extends BaseFragment {
         ListView listView = ListViewFactory.getListView();
 
         //创建一个PictureHolder  轮播图
-        PictureHolder pictureHolder = new PictureHolder();
+        mPictureHolder = new PictureHolder();
 
         //触发加载数据
-        pictureHolder.setDataAndRefreshHolderView(mPictures);
+        mPictureHolder.setDataAndRefreshHolderView(mPictures);
 
-        View headerView = pictureHolder.getHolderView();
+        View headerView = mPictureHolder.getHolderView();
         listView.addHeaderView(headerView);
 
         //设置adapter
@@ -72,6 +74,13 @@ public class HomeFragment extends BaseFragment {
         listView.setAdapter(mAdapter);
 
         return listView;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        mPictureHolder.mAutoScrollTask.stop();
     }
 
     /**
