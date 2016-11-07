@@ -45,7 +45,7 @@ import java.util.List;
 public class HomeFragment extends BaseFragment {
 
     private List<AppInfoBean> mData;            //listView的数据源
-    private List<String> mPictures;          //轮播图
+    private List<String> mPictures;          //轮播图图片的URLs集合
     private HomeProtocol mProtocol;
     private HomeAdapter mAdapter;
     private PictureHolder mPictureHolder;

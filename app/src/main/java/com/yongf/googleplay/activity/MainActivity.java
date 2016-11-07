@@ -55,6 +55,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private Toolbar mToolbar;
     private NavigationView mNvNav;
 
+
+
     /**
      * 初始化View
      */

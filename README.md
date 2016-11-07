@@ -1,6 +1,12 @@
 ## GooglePlay Demo ##
 > A GooglePlay Demo.
 
-## TODOs
-- add sign in/up pages
-- optimize SUBJECT module
+## TODO
+- [ ] add sign in/up pages
+- [ ] optimize SUBJECT fragment(image loading)
+- [ ] add splash activity
+- [ ] add download queue
+- [ ] add apps uninstall page
+- [ ] support for Add-to-Favorite
+- [ ] add app install logs
+- [ ] more setting items
