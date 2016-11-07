@@ -23,7 +23,7 @@ import android.widget.ListView;
 import com.yongf.googleplay.conf.Convention;
 import com.yongf.googleplay.factory.ThreadPoolFactory;
 import com.yongf.googleplay.holder.LoadMoreHolder;
-import com.yongf.googleplay.utils.UIUtils;
+import com.yongf.googleplay.util.UIUtils;
 
 import java.util.ArrayList;
 import java.util.List;

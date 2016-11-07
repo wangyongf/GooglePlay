@@ -34,8 +34,8 @@ import com.yongf.googleplay.R;
 import com.yongf.googleplay.base.BaseActivity;
 import com.yongf.googleplay.base.BaseFragment;
 import com.yongf.googleplay.factory.FragmentFactory;
-import com.yongf.googleplay.utils.LogUtils;
-import com.yongf.googleplay.utils.UIUtils;
+import com.yongf.googleplay.util.LogUtils;
+import com.yongf.googleplay.util.UIUtils;
 
 /**
  * 主界面

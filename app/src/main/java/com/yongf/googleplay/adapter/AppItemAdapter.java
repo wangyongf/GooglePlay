@@ -21,7 +21,7 @@ import com.yongf.googleplay.base.SuperBaseAdapter;
 import com.yongf.googleplay.bean.AppInfoBean;
 import com.yongf.googleplay.holder.AppItemHolder;
 import com.yongf.googleplay.manager.DownloadManager;
-import com.yongf.googleplay.utils.UIUtils;
+import com.yongf.googleplay.util.UIUtils;
 
 import java.util.LinkedList;
 import java.util.List;

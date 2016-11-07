@@ -23,10 +23,10 @@ import com.yongf.googleplay.bean.AppInfoBean;
 import com.yongf.googleplay.conf.Convention;
 import com.yongf.googleplay.manager.DownloadInfo;
 import com.yongf.googleplay.manager.DownloadManager;
-import com.yongf.googleplay.utils.BitmapHelper;
-import com.yongf.googleplay.utils.CommonUtils;
-import com.yongf.googleplay.utils.StringUtils;
-import com.yongf.googleplay.utils.UIUtils;
+import com.yongf.googleplay.util.BitmapHelper;
+import com.yongf.googleplay.util.CommonUtils;
+import com.yongf.googleplay.util.StringUtils;
+import com.yongf.googleplay.util.UIUtils;
 import com.yongf.googleplay.views.CircleProgressView;
 
 import java.io.File;

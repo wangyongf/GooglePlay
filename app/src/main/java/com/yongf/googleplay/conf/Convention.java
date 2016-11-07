@@ -15,7 +15,7 @@
 
 package com.yongf.googleplay.conf;
 
-import com.yongf.googleplay.utils.LogUtils;
+import com.yongf.googleplay.util.LogUtils;
 
 /**
  * 常量

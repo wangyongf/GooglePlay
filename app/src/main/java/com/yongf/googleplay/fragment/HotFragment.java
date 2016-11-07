@@ -23,7 +23,7 @@ import com.lidroid.xutils.exception.HttpException;
 import com.yongf.googleplay.base.BaseFragment;
 import com.yongf.googleplay.base.LoadingPager;
 import com.yongf.googleplay.protocol.HotProtocol;
-import com.yongf.googleplay.utils.UIUtils;
+import com.yongf.googleplay.util.UIUtils;
 import com.yongf.googleplay.views.FlowLayout;
 
 import java.io.IOException;

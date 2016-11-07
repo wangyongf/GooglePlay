@@ -8,7 +8,7 @@
  *  1.0         Scott Wang     2016/4/5       Create	
  */
 
-package com.yongf.googleplay.utils;
+package com.yongf.googleplay.util;
 
 import android.view.View;
 

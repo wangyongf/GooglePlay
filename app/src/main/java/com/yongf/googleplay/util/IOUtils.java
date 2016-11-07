@@ -9,7 +9,7 @@
  *  1.1         Scott Wang     2016/4/16     新增：重载close方法，可同时关闭多个流
  */
 
-package com.yongf.googleplay.utils;
+package com.yongf.googleplay.util;
 
 import java.io.Closeable;
 import java.io.IOException;

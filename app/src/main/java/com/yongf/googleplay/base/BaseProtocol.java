@@ -20,9 +20,9 @@ import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseStream;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.yongf.googleplay.conf.Convention;
-import com.yongf.googleplay.utils.FileUtils;
-import com.yongf.googleplay.utils.IOUtils;
-import com.yongf.googleplay.utils.LogUtils;
+import com.yongf.googleplay.util.FileUtils;
+import com.yongf.googleplay.util.IOUtils;
+import com.yongf.googleplay.util.LogUtils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

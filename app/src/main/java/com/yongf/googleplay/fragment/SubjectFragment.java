@@ -22,7 +22,7 @@ import com.yongf.googleplay.base.SuperBaseAdapter;
 import com.yongf.googleplay.bean.SubjectInfoBean;
 import com.yongf.googleplay.holder.SubjectHolder;
 import com.yongf.googleplay.protocol.SubjectProtocol;
-import com.yongf.googleplay.utils.UIUtils;
+import com.yongf.googleplay.util.UIUtils;
 
 import java.io.IOException;
 import java.util.List;

@@ -18,7 +18,7 @@ import com.lidroid.xutils.exception.HttpException;
 import com.yongf.googleplay.base.BaseFragment;
 import com.yongf.googleplay.base.LoadingPager;
 import com.yongf.googleplay.protocol.RecommendProtocol;
-import com.yongf.googleplay.utils.UIUtils;
+import com.yongf.googleplay.util.UIUtils;
 import com.yongf.googleplay.views.flyout.ShakeListener;
 import com.yongf.googleplay.views.flyout.StellarMap;
 

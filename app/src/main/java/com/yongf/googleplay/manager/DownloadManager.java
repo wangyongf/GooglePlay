@@ -20,11 +20,11 @@ import com.lidroid.xutils.http.client.HttpRequest;
 import com.yongf.googleplay.bean.AppInfoBean;
 import com.yongf.googleplay.conf.Convention;
 import com.yongf.googleplay.factory.ThreadPoolFactory;
-import com.yongf.googleplay.utils.CommonUtils;
-import com.yongf.googleplay.utils.FileUtils;
-import com.yongf.googleplay.utils.IOUtils;
-import com.yongf.googleplay.utils.LogUtils;
-import com.yongf.googleplay.utils.UIUtils;
+import com.yongf.googleplay.util.CommonUtils;
+import com.yongf.googleplay.util.FileUtils;
+import com.yongf.googleplay.util.IOUtils;
+import com.yongf.googleplay.util.LogUtils;
+import com.yongf.googleplay.util.UIUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;

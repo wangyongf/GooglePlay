@@ -18,8 +18,8 @@ import android.widget.FrameLayout;
 
 import com.yongf.googleplay.R;
 import com.yongf.googleplay.factory.ThreadPoolFactory;
-import com.yongf.googleplay.utils.LogUtils;
-import com.yongf.googleplay.utils.UIUtils;
+import com.yongf.googleplay.util.LogUtils;
+import com.yongf.googleplay.util.UIUtils;
 
 /**
  * 加载页面的基类

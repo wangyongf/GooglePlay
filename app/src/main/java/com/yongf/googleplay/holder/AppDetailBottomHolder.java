@@ -21,8 +21,8 @@ import com.yongf.googleplay.base.BaseHolder;
 import com.yongf.googleplay.bean.AppInfoBean;
 import com.yongf.googleplay.manager.DownloadInfo;
 import com.yongf.googleplay.manager.DownloadManager;
-import com.yongf.googleplay.utils.CommonUtils;
-import com.yongf.googleplay.utils.UIUtils;
+import com.yongf.googleplay.util.CommonUtils;
+import com.yongf.googleplay.util.UIUtils;
 import com.yongf.googleplay.views.ProgressButton;
 
 import java.io.File;

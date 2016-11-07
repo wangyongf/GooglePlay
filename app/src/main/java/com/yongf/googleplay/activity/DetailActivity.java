@@ -36,8 +36,8 @@ import com.yongf.googleplay.holder.AppDetailPicHolder;
 import com.yongf.googleplay.holder.AppDetailSecureHolder;
 import com.yongf.googleplay.manager.DownloadManager;
 import com.yongf.googleplay.protocol.DetailProtocol;
-import com.yongf.googleplay.utils.LogUtils;
-import com.yongf.googleplay.utils.UIUtils;
+import com.yongf.googleplay.util.LogUtils;
+import com.yongf.googleplay.util.UIUtils;
 
 import java.io.IOException;
 

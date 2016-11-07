@@ -24,9 +24,9 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.yongf.googleplay.R;
 import com.yongf.googleplay.base.BaseHolder;
 import com.yongf.googleplay.conf.Convention;
-import com.yongf.googleplay.utils.BitmapHelper;
-import com.yongf.googleplay.utils.LogUtils;
-import com.yongf.googleplay.utils.UIUtils;
+import com.yongf.googleplay.util.BitmapHelper;
+import com.yongf.googleplay.util.LogUtils;
+import com.yongf.googleplay.util.UIUtils;
 
 import java.util.List;
 

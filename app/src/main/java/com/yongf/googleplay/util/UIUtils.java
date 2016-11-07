@@ -10,7 +10,7 @@
  *  1.2         Scott Wang     2016/4/15     得到strings.xml中带占位符的string
  */
 
-package com.yongf.googleplay.utils;
+package com.yongf.googleplay.util;
 
 import android.content.Context;
 import android.content.res.AssetManager;

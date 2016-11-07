@@ -17,7 +17,7 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.yongf.googleplay.R;
 import com.yongf.googleplay.base.BaseHolder;
-import com.yongf.googleplay.utils.UIUtils;
+import com.yongf.googleplay.util.UIUtils;
 
 /**
  * ${description}
