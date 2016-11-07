@@ -18,7 +18,7 @@
             android:layout_height="38dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/selector_detail_btn_bg"
+            android:background="@drawable/bg_selector_detail_btn"
             android:text="收藏"
             android:textColor="@android:color/white" />
 
@@ -31,7 +31,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:background="@drawable/selector_detail_btn_bg"
+            android:background="@drawable/bg_selector_detail_btn"
             android:text="分享"
             android:textColor="@android:color/white" />
 

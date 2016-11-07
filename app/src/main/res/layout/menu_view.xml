@@ -70,7 +70,7 @@
             android:id="@+id/home_layout"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@drawable/menu_item_bg"
+            android:background="@drawable/bg_menu_item"
             android:clickable="true"
             android:gravity="center_vertical"
             android:paddingLeft="15dp" >
@@ -106,7 +106,7 @@
             android:id="@+id/setting_layout"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@drawable/menu_item_bg"
+            android:background="@drawable/bg_menu_item"
             android:clickable="true"
             android:gravity="center_vertical"
             android:paddingLeft="15dp" >
@@ -142,7 +142,7 @@
             android:id="@+id/theme_layout"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@drawable/menu_item_bg"
+            android:background="@drawable/bg_menu_item"
             android:clickable="true"
             android:gravity="center_vertical"
             android:paddingLeft="15dp" >
@@ -178,7 +178,7 @@
             android:id="@+id/scans_layout"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@drawable/menu_item_bg"
+            android:background="@drawable/bg_menu_item"
             android:clickable="true"
             android:gravity="center_vertical"
             android:paddingLeft="15dp" >
@@ -214,7 +214,7 @@
             android:id="@+id/feedback_layout"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@drawable/menu_item_bg"
+            android:background="@drawable/bg_menu_item"
             android:clickable="true"
             android:gravity="center_vertical"
             android:paddingLeft="15dp" >
@@ -250,7 +250,7 @@
             android:id="@+id/updates_layout"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@drawable/menu_item_bg"
+            android:background="@drawable/bg_menu_item"
             android:clickable="true"
             android:gravity="center_vertical"
             android:paddingLeft="15dp" >
@@ -286,7 +286,7 @@
             android:id="@+id/about_layout"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@drawable/menu_item_bg"
+            android:background="@drawable/bg_menu_item"
             android:clickable="true"
             android:gravity="center_vertical"
             android:paddingLeft="15dp" >
@@ -322,7 +322,7 @@
             android:id="@+id/exit_layout"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@drawable/menu_item_bg"
+            android:background="@drawable/bg_menu_item"
             android:clickable="true"
             android:gravity="center_vertical"
             android:paddingLeft="15dp" >

@@ -22,7 +22,7 @@
 
     <style name="bg_layout">
         <item name="android:orientation">vertical</item>
-        <item name="android:background">@drawable/shape_bg</item>
+        <item name="android:background">@drawable/bg_shape</item>
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">8.0dip</item>
@@ -42,21 +42,21 @@
     </style>
 
     <style name="bg_top_layout" parent="@style/bg_base_layout">
-        <item name="android:background">@drawable/selector_top_bg</item>
+        <item name="android:background">@drawable/bg_selector_top</item>
     </style>
 
 
     <style name="bg_mid_layout" parent="@style/bg_base_layout">
-        <item name="android:background">@drawable/selector_mid_bg</item>
+        <item name="android:background">@drawable/bg_selector_mid</item>
     </style>
 
 
     <style name="bg_bottom_layout" parent="@style/bg_base_layout">
-        <item name="android:background">@drawable/selector_bottom_bg</item>
+        <item name="android:background">@drawable/bg_selector_bottom</item>
     </style>
 
     <style name="bg_single_layout" parent="@style/bg_base_layout">
-        <item name="android:background">@drawable/selector_single_bg</item>
+        <item name="android:background">@drawable/bg_selector_single</item>
     </style>
 
 </resources>
