@@ -9,4 +9,4 @@
 - [ ] add apps uninstall page
 - [ ] support for Add-to-Favorite
 - [ ] add app install logs
-- [ ] more setting items
+- [ ] finish setting activity
