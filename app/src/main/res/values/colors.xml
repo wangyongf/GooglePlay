@@ -20,6 +20,6 @@
     <color name="window_bg">#fff0f3f6</color>
     <color name="shape_line">#ffcccccc</color>
     <color name="white">#ffffffff</color>
-    <color name="button_selected">#6666FF</color>
+    <color name="button_selected">#cecece</color>
 
 </resources>

@@ -30,163 +30,302 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- 界面显示 -->
+            <!-- 通知栏提示 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="通知栏提示" />
+
             <LinearLayout style="@style/bg_layout">
 
-                <LinearLayout style="@style/bg_single_layout">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="12.0dip"
-                        android:layout_weight="1.0"
-                        android:text="界面显示"
-                        android:textColor="#ff333333"
-                        android:textSize="16.0dip" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="12.0dip"
-                        android:src="@drawable/setting_arrow" />
-                </LinearLayout>
-            </LinearLayout>
-
-
-            <!--  反馈建议	关于 -->
-            <LinearLayout style="@style/bg_layout">
-                <!--  反馈建议 	-->
                 <LinearLayout style="@style/bg_top_layout">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="12.0dip"
-                        android:layout_weight="1.0"
-                        android:text="反馈建议"
+                        android:layout_marginLeft="12dp"
+                        android:layout_weight="1"
+                        android:text="更新提醒"
                         android:textColor="#ff333333"
-                        android:textSize="16.0dip" />
+                        android:textSize="16dp" />
 
-                    <ImageView
+                    <com.kyleduo.switchbutton.SwitchButton
+                        android:id="@+id/sb_update_notify"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="12.0dip"
-                        android:src="@drawable/setting_arrow" />
+                        android:layout_gravity="center"
+                        android:layout_marginRight="20dp"
+                        android:checked="true"
+                        app:kswBackDrawable="@drawable/miui_back_drawable"
+                        app:kswBackMeasureRatio="2"
+                        app:kswThumbDrawable="@drawable/miui_thumb_drawable"
+                        app:kswThumbHeight="18dp"
+                        app:kswThumbWidth="18dp" />
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1.0px"
+                    android:layout_height="0.5dp"
                     android:background="@drawable/shape_line" />
 
-                <!-- 关于 -->
                 <LinearLayout style="@style/bg_bottom_layout">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="12.0dip"
+                        android:layout_marginLeft="12dp"
                         android:layout_weight="1.0"
-                        android:text="关于"
+                        android:text="接收推送通知"
                         android:textColor="#ff333333"
-                        android:textSize="16.0dip" />
+                        android:textSize="16dp" />
+
+                    <com.kyleduo.switchbutton.SwitchButton
+                        android:id="@+id/sb_recv_push"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="20dp"
+                        android:checked="true"
+                        app:kswBackDrawable="@drawable/miui_back_drawable"
+                        app:kswBackMeasureRatio="2"
+                        app:kswThumbDrawable="@drawable/miui_thumb_drawable"
+                        app:kswThumbHeight="18dp"
+                        app:kswThumbWidth="18dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <!--  其他功能 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="其他功能" />
+
+            <LinearLayout style="@style/bg_layout">
+                <!--  自动升级 	-->
+                <LinearLayout
+                    style="@style/bg_top_layout"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="12dp"
+                            android:text="自动升级"
+                            android:textColor="#ff333333"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginTop="5dp"
+                            android:text="WLAN网络下，锁屏时自动升级"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <com.kyleduo.switchbutton.SwitchButton
+                        android:id="@+id/sb_auto_upgrade"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="20dp"
+                        android:checked="true"
+                        app:kswBackDrawable="@drawable/miui_back_drawable"
+                        app:kswBackMeasureRatio="2"
+                        app:kswThumbDrawable="@drawable/miui_thumb_drawable"
+                        app:kswThumbHeight="18dp"
+                        app:kswThumbWidth="18dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@drawable/shape_line" />
+
+                <LinearLayout style="@style/bg_mid_layout">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_weight="1.0"
+                        android:text="静默安装"
+                        android:textColor="#ff333333"
+                        android:textSize="16dp" />
+
+                    <com.kyleduo.switchbutton.SwitchButton
+                        android:id="@+id/sb_silent_install"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="20dp"
+                        android:checked="true"
+                        app:kswBackDrawable="@drawable/miui_back_drawable"
+                        app:kswBackMeasureRatio="2"
+                        app:kswThumbDrawable="@drawable/miui_thumb_drawable"
+                        app:kswThumbHeight="18dp"
+                        app:kswThumbWidth="18dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@drawable/shape_line" />
+
+                <LinearLayout
+                    style="@style/bg_mid_layout"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="12dp"
+                            android:text="删除安装包"
+                            android:textColor="#ff333333"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginTop="5dp"
+                            android:text="安装完成后删除安装包"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <com.kyleduo.switchbutton.SwitchButton
+                        android:id="@+id/sb_delete_apk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="20dp"
+                        android:checked="true"
+                        app:kswBackDrawable="@drawable/miui_back_drawable"
+                        app:kswBackMeasureRatio="2"
+                        app:kswThumbDrawable="@drawable/miui_thumb_drawable"
+                        app:kswThumbHeight="18dp"
+                        app:kswThumbWidth="18dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@drawable/shape_line" />
+
+                <!-- 清楚升级记录 -->
+                <LinearLayout style="@style/bg_mid_layout">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_weight="1"
+                        android:text="清除升级记录"
+                        android:textColor="#ff333333"
+                        android:textSize="16dp" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="12.0dip"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/setting_arrow" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@drawable/shape_line" />
+
+                <LinearLayout style="@style/bg_bottom_layout">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_weight="1"
+                        android:text="清除商店缓存"
+                        android:textColor="#ff333333"
+                        android:textSize="16dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
                         android:src="@drawable/setting_arrow" />
                 </LinearLayout>
             </LinearLayout>
 
 
-            <!--  声音提示	震动提示	     消息提示 -->
-            <LinearLayout style="@style/bg_layout">
+            <!--  帮助 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="帮助" />
+
+            <LinearLayout
+                style="@style/bg_layout"
+                android:layout_marginBottom="10dp">
                 <!--  声音提示 	-->
                 <LinearLayout style="@style/bg_top_layout">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="12.0dip"
-                        android:layout_weight="1.0"
-                        android:text="声音"
+                        android:layout_marginLeft="12dp"
+                        android:layout_weight="1"
+                        android:text="关于"
                         android:textColor="#ff333333"
-                        android:textSize="16.0dip" />
+                        android:textSize="16dp" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="12.0dip"
+                        android:layout_marginRight="20dp"
                         android:src="@drawable/setting_arrow" />
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1.0px"
+                    android:layout_height="0.5dp"
                     android:background="@drawable/shape_line" />
 
                 <!--  震动提示 	-->
-                <LinearLayout style="@style/bg_mid_layout">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="12.0dip"
-                        android:layout_weight="1.0"
-                        android:text="震动提示"
-                        android:textColor="#ff333333"
-                        android:textSize="16.0dip" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="12.0dip"
-                        android:src="@drawable/setting_arrow" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1.0px"
-                    android:background="@drawable/shape_line" />
-
-                <!-- 消息提示  -->
                 <LinearLayout style="@style/bg_bottom_layout">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="12.0dip"
-                        android:layout_weight="1.0"
-                        android:text="消息提示"
+                        android:layout_marginLeft="12dp"
+                        android:layout_weight="1"
+                        android:text="意见反馈"
                         android:textColor="#ff333333"
-                        android:textSize="16.0dip" />
+                        android:textSize="16dp" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="12.0dip"
+                        android:layout_marginRight="20dp"
                         android:src="@drawable/setting_arrow" />
                 </LinearLayout>
-            </LinearLayout>
-
-
-            <LinearLayout
-                style="@style/bg_layout"
-                android:padding="10.0dip">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12.0dip"
-                    android:layout_weight="1.0"
-                    android:ellipsize="marquee"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:scrollHorizontally="true"
-                    android:text="@string/blog_addr"
-                    android:textColor="#ffaa0000"
-                    android:textSize="16.0dip" />
             </LinearLayout>
 
         </LinearLayout>
